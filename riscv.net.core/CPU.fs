@@ -1,5 +1,7 @@
 module riscv.net.core.CPU
 
+open riscv.net.core.Bus
+
 module Add =
     let (|+|) (a: uint64) (b: uint64) : uint64 =
         let sum = a + b
@@ -7,19 +9,17 @@ module Add =
 
 open Add
 open System
+open Param
 
-/// CPU (Center Process Unit) is one of the core components of a computer.
-/// It consist of a 64-bit pc register, 32 64-bit integer registers and a DRAM as a vector of u8.
-type CPU(__code: array<uint8>) =
+type CPU(code: array<uint8>) =
+
+    [<DefaultValue>]
+    val mutable public PC: uint64
+
     let __regs: array<uint64> = Array.zeroCreate<uint64> (32)
-    let mutable __pc: uint64 = 0UL
-    let __dram: array<uint8> = Array.zeroCreate<uint8> (int (CPU.DRAM_SIZE))
+    let __bus: Bus = Bus(code)
 
-    do
-        // the stack pointer register sp (aka x2) should point to the top address of DRAM
-        __regs[2] <- CPU.DRAM_SIZE - 1UL
-
-        Array.Copy(__code, __dram, __code.Length)
+    do __regs[2] <- DRAM_END
 
     static member public RVABI =
         [| "zero"
@@ -55,57 +55,40 @@ type CPU(__code: array<uint8>) =
            "t5"
            "t6" |]
 
-    /// The size of memory to initialize our CPU (128MB).
-    static member public DRAM_SIZE: uint64 = 1024UL * 1024UL * 128UL
-
-    /// RISC-V has 32 registers
     member public _.REGS = __regs
 
-    /// PC register contains the memory address of next instruction
-    /// Initialize it to 0, means will start fetch instruction from address 0.
-    member public _.PC: uint64 = __pc
+    member public _.Load(addr: uint64, size: uint64) : Result<uint64, Exception> = __bus.Load(addr, size)
 
-    /// Memory, a byte-array. There is no memory in real CPU.
-    member public _.DRAM: array<uint8> = __dram
+    member public _.Store(addr: uint64, size: uint64, value: uint64) : Result<unit, Exception> =
+        __bus.Store(addr, size, value)
 
-    /// CPU use pc as a base address to fetch 4 continous bytes from DRAM,
-    /// since RISC-V instruction is 32-bit. read the u8 on [pc, pc+1, pc+2, pc+3] and build up a u32.
-    /// This emulator support little-endianness.
-    member public this.Fetch() : uint32 =
-        let index: int = int __pc in
+    member public this.Fetch() : Result<uint64, Exception> = __bus.Load(this.PC, 32UL)
 
-        let inst =
-            (uint32 (__dram[index]))
-            ||| ((uint32 (__dram[index + 1])) <<< 8)
-            ||| ((uint32 (__dram[index + 2])) <<< 16)
-            ||| ((uint32 (__dram[index + 3])) <<< 24)
+    member inline private this.UpdatePC() : Result<uint64, Exception> = Ok(this.PC + 4UL)
 
-        __pc <- __pc + 4UL
-
-        inst
-
-
-    /// riscv currently has four basic instruction encoding formats
-    member public this.Execute(instruction: uint32) =
+    member public this.Execute(instruction: uint64) : Result<uint64, Exception> =
         // decode as r-type
-        let opcode = uint (instruction &&& 0x7Fu) in
-        let rd = int ((instruction >>> 7) &&& 0x1Fu) in
-        let rs1 = int ((instruction >>> 15) &&& 0x1Fu) in
-        let rs2 = int ((instruction >>> 20) &&& 0x1Fu) in
-        let _funct3 = int ((instruction >>> 12) &&& 0x7u) in
-        let _funct7 = int ((instruction >>> 25) &&& 0x7Fu) in
+        let opcode = uint (instruction &&& 0x7FUL) in
+        let rd = int ((instruction >>> 7) &&& 0x1FUL) in
+        let rs1 = int ((instruction >>> 15) &&& 0x1FUL) in
+        let rs2 = int ((instruction >>> 20) &&& 0x1FUL) in
+        let _funct3 = int ((instruction >>> 12) &&& 0x7UL) in
+        let _funct7 = int ((instruction >>> 25) &&& 0x7FUL) in
 
         // x0 is hardwired zero
         __regs[0] <- 0UL
 
-        // Execute stage.
-        // These two instructions ignore arithmetic overflow errors (arithmetic overflow),
-        // overflow bit (bit) will be discarded directly
         match opcode with
         // addi
-        | 0x13u -> __regs[rd] <- __regs[rs1] |+| uint64 ((int64 (instruction &&& 0xFFF00000u)) >>> 20l)
+        | 0x13u ->
+            __regs[rd] <- __regs[rs1] |+| uint64 ((int64 (instruction &&& 0xFFF00000UL)) >>> 20l)
+            this.UpdatePC()
+
         // add
-        | 0x33u -> __regs[rd] <- __regs[rs1] |+| __regs[rs2]
+        | 0x33u ->
+            __regs[rd] <- __regs[rs1] |+| __regs[rs2]
+            this.UpdatePC()
+
         | _ -> raise (Exception $"----------> Invalid opcode: 0x%X{opcode}")
 
     /// View the state of the registers to verify that the CPU executed instructions correctly.

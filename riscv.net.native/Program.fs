@@ -9,10 +9,15 @@ let main (args: string array) : int =
     let cpu = System.IO.File.ReadAllBytes(args[0]) |> riscv.net.core.CPU.CPU in
 
     try
-        while cpu.PC < uint64 (cpu.DRAM.Length) do
-            cpu.Execute(cpu.Fetch())
-    with :? System.Exception as e ->
-        printfn $"{e.Message}"
+        while true do
+            match cpu.Fetch() with
+            | Error(e) -> raise e
+            | Ok(instruction) ->
+                match cpu.Execute(instruction) with
+                | Error(e) -> raise e
+                | Ok(pc) -> cpu.PC <- pc
+    with e ->
+        printfn $"{e}"
         cpu.DumpRegisters()
 
     0
