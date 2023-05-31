@@ -6,10 +6,8 @@ open Microsoft.AspNetCore.Builder
 open Microsoft.AspNetCore.Hosting
 open Microsoft.Extensions.DependencyInjection
 open Microsoft.Extensions.Hosting
-open Bolero
 open Bolero.Remoting.Server
 open Bolero.Server
-open riscv.net.browser.wasm
 open Bolero.Templating.Server
 
 type Startup() =
@@ -19,12 +17,12 @@ type Startup() =
     member this.ConfigureServices(services: IServiceCollection) =
         services.AddMvc() |> ignore
         services.AddServerSideBlazor() |> ignore
+
         services
             .AddAuthorization()
             .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-                .AddCookie()
-                .Services
-            .AddBoleroRemoting<BookService>()
+            .AddCookie()
+            .Services.AddBoleroRemoting<BookService>()
             .AddBoleroHost()
 #if DEBUG
             .AddHotReload(templateDir = __SOURCE_DIRECTORY__ + "/../riscv.net.browser.wasm.Client")
@@ -61,4 +59,5 @@ module Program =
             .UseStartup<Startup>()
             .Build()
             .Run()
+
         0
