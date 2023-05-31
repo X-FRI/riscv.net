@@ -1,7 +1,14 @@
-# Build
-
+# F# Project build
 bin/
 obj/
 
-# Tools
+# JetBrains
 .idea/
+
+# VSCode
+.vscode
+
+# riscv.net.localhost
+## test riscv binary file
+add-addi
+add-addi.bin
