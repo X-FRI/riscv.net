@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "riscv.net.browser.js", "ris
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "App", "riscv.net.browser.js\src\App.fsproj", "{92852CBF-83CE-4694-86F6-9AEEA3B7F6DF}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "riscv.net.localhost", "riscv.net.localhost\riscv.net.localhost.fsproj", "{94D34D63-A4AA-4851-9EB6-23F21053E9B1}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "riscv.net.native", "riscv.net.native\riscv.net.native.fsproj", "{94D34D63-A4AA-4851-9EB6-23F21053E9B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
