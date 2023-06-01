@@ -3,7 +3,7 @@
 open riscv.net.native.CPU
 
 [<EntryPoint>]
-let main (args: string array) : int =
+let main (args : string array) : int =
     if args.Length < 1 then
         printfn $"riscv.net.localhost binary"
 

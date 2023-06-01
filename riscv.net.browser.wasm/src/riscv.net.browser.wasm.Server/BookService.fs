@@ -8,8 +8,8 @@ open Bolero.Remoting
 open Bolero.Remoting.Server
 open riscv.net.browser.wasm
 
-type BookService(ctx: IRemoteContext, env: IWebHostEnvironment) =
-    inherit RemoteHandler<Client.Main.BookService>()
+type BookService (ctx : IRemoteContext, env : IWebHostEnvironment) =
+    inherit RemoteHandler<Client.Main.BookService> ()
 
     let books =
         let json = Path.Combine(env.ContentRootPath, "data/books.json") |> File.ReadAllText

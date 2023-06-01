@@ -16,20 +16,20 @@ type Page =
 
 /// The Elmish application's model.
 type Model =
-    { page: Page
-      counter: int
-      books: Book[] option
-      error: string option
-      username: string
-      password: string
-      signedInAs: option<string>
-      signInFailed: bool }
+    { page : Page
+      counter : int
+      books : Book[] option
+      error : string option
+      username : string
+      password : string
+      signedInAs : option<string>
+      signInFailed : bool }
 
 and Book =
-    { title: string
-      author: string
-      publishDate: DateTime
-      isbn: string }
+    { title : string
+      author : string
+      publishDate : DateTime
+      isbn : string }
 
 let initModel =
     { page = Home
@@ -45,22 +45,22 @@ let initModel =
 type BookService =
     {
         /// Get the list of all books in the collection.
-        getBooks: unit -> Async<Book[]>
+        getBooks : unit -> Async<Book[]>
 
         /// Add a book in the collection.
-        addBook: Book -> Async<unit>
+        addBook : Book -> Async<unit>
 
         /// Remove a book from the collection, identified by its ISBN.
-        removeBookByIsbn: string -> Async<unit>
+        removeBookByIsbn : string -> Async<unit>
 
         /// Sign into the application.
-        signIn: string * string -> Async<option<string>>
+        signIn : string * string -> Async<option<string>>
 
         /// Get the user's name, or None if they are not authenticated.
-        getUsername: unit -> Async<string>
+        getUsername : unit -> Async<string>
 
         /// Sign out from the application.
-        signOut: unit -> Async<unit>
+        signOut : unit -> Async<unit>
     }
 
     interface IRemoteService with
@@ -149,7 +149,7 @@ let counterPage model dispatch =
         .Value(model.counter, (fun v -> dispatch (SetCounter v)))
         .Elt()
 
-let dataPage model (username: string) dispatch =
+let dataPage model (username : string) dispatch =
     Main
         .Data()
         .Reload(fun _ -> dispatch GetBooks)
@@ -190,7 +190,7 @@ let signInPage model dispatch =
         )
         .Elt()
 
-let menuItem (model: Model) (page: Page) (text: string) =
+let menuItem (model : Model) (page : Page) (text : string) =
     Main
         .MenuItem()
         .Active(if model.page = page then "is-active" else "")
@@ -226,8 +226,8 @@ let view model dispatch =
         )
         .Elt()
 
-type MyApp() =
-    inherit ProgramComponent<Model, Message>()
+type MyApp () =
+    inherit ProgramComponent<Model, Message> ()
 
     override this.Program =
         let bookService = this.Remote<BookService>()
