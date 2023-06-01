@@ -6,13 +6,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Compile Include="Program.fs"/>
-        <Content Include="add-addi.s"/>
-        <Content Include="Makefile"/>
+        <Compile Include="CPU.fs" />
+        <Compile Include="Program.fs" />
+        <Content Include="add-addi.s" />
+        <Content Include="Makefile" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\riscv.net.core\riscv.net.core.fsproj"/>
+        <ProjectReference Include="..\riscv.net.core\riscv.net.core.fsproj" />
     </ItemGroup>
 
 </Project>

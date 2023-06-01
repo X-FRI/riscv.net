@@ -11,7 +11,7 @@ open Add
 open System
 open Param
 
-type CPU(code: array<uint8>) =
+type CPU(code: array<uint8>) as self =
 
     [<DefaultValue>]
     val mutable public PC: uint64
@@ -19,7 +19,11 @@ type CPU(code: array<uint8>) =
     let __regs: array<uint64> = Array.zeroCreate<uint64> (32)
     let __bus: Bus = Bus(code)
 
-    do __regs[2] <- DRAM_END
+    do
+        __regs[2] <- DRAM_END
+        // self.PC <-  DRAM_BASE
+
+        printfn $"{self.PC} <-----"
 
     static member public RVABI =
         [| "zero"
@@ -90,17 +94,3 @@ type CPU(code: array<uint8>) =
             this.UpdatePC()
 
         | _ -> raise (Exception $"----------> Invalid opcode: 0x%X{opcode}")
-
-    /// View the state of the registers to verify that the CPU executed instructions correctly.
-    member public this.DumpRegisters() =
-        printfn "o- REGISTERS"
-
-        __regs[0] <- 0UL
-
-        let mutable i = 0
-
-        while i <> 32 do
-            printfn
-                $"| x{i}({CPU.RVABI[i]}) \t= 0x%02X{__regs[i]} \t|\t x{i + 1}({CPU.RVABI[i + 1]}) \t= 0x%02X{__regs[i + 1]} \t|\t x{i + 2}({CPU.RVABI[i + 2]}) \t= 0x%X{__regs[i + 2]} \t|\t x{i + 3}({CPU.RVABI[i + 3]}) \t= 0x%02X{__regs[i + 3]} \t|"
-
-            i <- i + 4

@@ -14,8 +14,7 @@ type DRAM(code: array<uint8>) =
         | 8UL
         | 16UL
         | 32UL
-        | 64UL -> Error(LoadAccessFault(addr))
-        | _ ->
+        | 64UL ->
             let nbytes: uint64 = size / 8UL in
             let index: int = int (addr - DRAM_BASE) in
             let mutable code: uint64 = uint64 __dram[index]
@@ -25,14 +24,14 @@ type DRAM(code: array<uint8>) =
                 code <- (code ||| ((uint64 (__dram[index + i])) <<< (i * 8)))
 
             Ok(code)
+        | _ -> Error(LoadAccessFault(addr))
 
     member public _.Store(addr: uint64, size: uint64, value: uint64) : Result<unit, Exception> =
         match size with
         | 8UL
         | 16UL
         | 32UL
-        | 64UL -> Error(StoreAMOAccessFault(addr))
-        | _ ->
+        | 64UL ->
             let nbytes: uint64 = size / 8UL in
             let index: int = int (addr - DRAM_BASE) in
 
@@ -41,3 +40,4 @@ type DRAM(code: array<uint8>) =
                 __dram[index + 1] <- uint8 ((value >>> (8 * i)) &&& 0xFFUL)
 
             Ok(())
+        | _ -> Error(StoreAMOAccessFault(addr))
