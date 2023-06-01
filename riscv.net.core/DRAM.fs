@@ -7,9 +7,10 @@ open Exception
 type DRAM(code: array<uint8>) =
 
     let __dram: array<uint8> = Array.zeroCreate<uint8> (int (DRAM_SIZE))
-    do Array.Copy(code, __dram, 0)
+    do
+        Array.Copy(code, __dram, code.Length)
 
-    member public _.Load(addr: uint64, size: uint64) : Result<uint64, Exception> =
+    member public _.Load(addr: uint64, size: uint64) : uint64 =
         match size with
         | 8UL
         | 16UL
@@ -23,10 +24,10 @@ type DRAM(code: array<uint8>) =
             for i = 1 to int (nbytes) do
                 code <- (code ||| ((uint64 (__dram[index + i])) <<< (i * 8)))
 
-            Ok(code)
-        | _ -> Error(LoadAccessFault(addr))
+            code
+        | _ -> raise (LoadAccessFault(addr))
 
-    member public _.Store(addr: uint64, size: uint64, value: uint64) : Result<unit, Exception> =
+    member public _.Store(addr: uint64, size: uint64, value: uint64) : unit =
         match size with
         | 8UL
         | 16UL
@@ -39,5 +40,4 @@ type DRAM(code: array<uint8>) =
             for i = 0 to int (nbytes) do
                 __dram[index + 1] <- uint8 ((value >>> (8 * i)) &&& 0xFFUL)
 
-            Ok(())
-        | _ -> Error(StoreAMOAccessFault(addr))
+        | _ -> raise (StoreAMOAccessFault(addr))

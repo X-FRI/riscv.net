@@ -1,12 +1,12 @@
-module riscv.net.native.CPU 
+module riscv.net.native.CPU
 
 type CPU(code: array<uint8>) =
     inherit riscv.net.core.CPU.CPU(code)
-    
+
     /// View the state of the registers to verify that the CPU executed instructions correctly.
     member public this.DumpRegisters() =
         printfn "o- REGISTERS"
-        
+
         let __regs = this.REGS
         let mutable i = 0
 

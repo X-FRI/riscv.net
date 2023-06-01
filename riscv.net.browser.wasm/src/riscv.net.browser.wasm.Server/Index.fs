@@ -19,6 +19,7 @@ let page =
 
             link {
                 attr.rel "stylesheet"
+
                 attr.href "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.4/css/bulma.min.css"
             }
 
@@ -48,6 +49,7 @@ let page =
 
                         img {
                             attr.style "height:40px"
+
                             attr.src "https://github.com/fsbolero/website/raw/master/src/Website/img/wasm-fsharp.png"
                         }
 

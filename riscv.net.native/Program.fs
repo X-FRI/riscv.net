@@ -1,6 +1,6 @@
 ﻿module riscv.net.native.Program
 
-open riscv.net.native.CPU 
+open riscv.net.native.CPU
 
 [<EntryPoint>]
 let main (args: string array) : int =
@@ -11,12 +11,7 @@ let main (args: string array) : int =
 
     try
         while true do
-            match cpu.Fetch() with
-            | Error(e) -> raise e
-            | Ok(instruction) ->
-                match cpu.Execute(instruction) with
-                | Error(e) -> raise e
-                | Ok(pc) -> cpu.PC <- pc
+            cpu.PC <- cpu.Execute(cpu.Fetch())
     with e ->
         printfn $"{e}"
         cpu.DumpRegisters()

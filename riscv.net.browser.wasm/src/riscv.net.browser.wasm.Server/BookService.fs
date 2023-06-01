@@ -13,6 +13,7 @@ type BookService(ctx: IRemoteContext, env: IWebHostEnvironment) =
 
     let books =
         let json = Path.Combine(env.ContentRootPath, "data/books.json") |> File.ReadAllText
+
         JsonSerializer.Deserialize<Client.Main.Book[]>(json) |> ResizeArray
 
     override this.Handler =
@@ -29,6 +30,7 @@ type BookService(ctx: IRemoteContext, env: IWebHostEnvironment) =
                   async {
                       if password = "password" then
                           do! ctx.HttpContext.AsyncSignIn(username, TimeSpan.FromDays(365.))
+
                           return Some username
                       else
                           return None
