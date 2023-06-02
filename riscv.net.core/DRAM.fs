@@ -8,9 +8,9 @@ type DRAM (code : array<uint8>) =
 
     let __dram : array<uint8> = Array.zeroCreate<uint8> (int (DRAM_SIZE))
     do Array.Copy(code, __dram, code.Length)
-    
+
     /// addr/size must be valid
-    member private _.Check(addr : uint64, size : uint64) : unit =
+    member private _.Check (addr : uint64, size : uint64) : unit =
         match size with
         | 8UL
         | 16UL
@@ -20,22 +20,22 @@ type DRAM (code : array<uint8>) =
 
     member public this.Load (addr : uint64, size : uint64) : uint64 =
         this.Check(addr, size)
-        
-        let nbytes : uint64 = size / 8UL in
-        let index : int = int (addr - DRAM_BASE) in
-        let mutable code : uint64 = uint64 __dram[index]
+
+        let nbytes = size / 8UL in
+        let index = int (addr - DRAM_BASE) in
+        let mutable code = uint64 __dram[index]
 
         for i = 1 to int (nbytes) do
             code <- (code ||| ((uint64 (__dram[index + i])) <<< (i * 8)))
 
         code
-        
+
 
     member public this.Store (addr : uint64, size : uint64, value : uint64) : unit =
         this.Check(addr, size)
-        
-        let nbytes : uint64 = size / 8UL in
-        let index : int = int (addr - DRAM_BASE) in
+
+        let nbytes = size / 8UL in
+        let index = int (addr - DRAM_BASE) in
 
         for i = 0 to int (nbytes) do
             __dram[index + 1] <- uint8 ((value >>> (8 * i)) &&& 0xFFUL)

@@ -12,6 +12,7 @@ let main (args : string array) : int =
     try
         while true do
             cpu.PC <- cpu.Execute(cpu.Fetch())
+
     with e ->
         printfn $"{e}"
         cpu.DumpRegisters()
