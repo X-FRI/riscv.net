@@ -1,5 +1,6 @@
 module riscv.net.core.CPU
 
+open System.Diagnostics
 open riscv.net.core.Bus
 open riscv.net.core.Exception
 
@@ -163,6 +164,27 @@ type CPU (code : array<uint8>) as self =
 
             | _ -> raise (IllegalInstruction(inst))
 
+            this.UpdatePC()
+
+        | 0x23UL ->
+            let imm = (((inst &&& 0xFE000000UL) |> int32 |> int64 >>> 20) |> uint64) ||| ((inst >>> 7) &&& 0x1F)
+            let addr = UInt64.wrapping_add(__regs[rs1], imm)
+            
+            match funct3 with
+            // SB
+            | 0x0UL -> this.Store(addr, 8UL, __regs[rs2])
+            
+            // SH
+            | 0x1UL -> this.Store(addr, 16UL, __regs[rs2])
+            
+            // SW
+            | 0x2UL -> this.Store(addr, 32UL, __regs[rs2])
+            
+            // SD
+            | 0x3UL -> this.Store(addr, 64UL, __regs[rs2])
+            
+            | _ -> raise(UnreachableException())
+            
             this.UpdatePC()
 
         | 0x33UL ->
