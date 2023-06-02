@@ -3,13 +3,8 @@ module riscv.net.core.CPU
 open riscv.net.core.Bus
 open riscv.net.core.Exception
 
-module Add =
-    let (|+|) (a : uint64) (b : uint64) : uint64 =
-        let sum = a + b
-        if sum < a || sum < b then a &&& b else sum
-
-open Add
 open Param
+open riscv.net.core.Numeric
 
 type CPU (code : array<uint8>) as self =
 
@@ -75,20 +70,33 @@ type CPU (code : array<uint8>) as self =
         let funct3 = (inst &&& 0x00007000UL) >>> 12
         let funct7 = (inst &&& 0xFE000000UL) >>> 25
 
-        printfn $"pc = {this.PC}, inst = {inst}, funct3 = {funct3}, funct7 = {funct7}, opcode = {opcode}"
+        printfn $"pc = this.PC, inst = inst, funct3 = funct3, funct7 = funct7, opcode = opcode"
 
         match opcode with
         | 0x03UL ->
             let imm = uint64 ((inst |> int32 |> int64) >>> 20)
-            let addr = __regs[rs1] |+| imm
+            let addr = UInt64.wrapping_add(__regs[rs1], imm)
 
             match funct3 with
+            // LB
             | 0x0UL -> __regs[rd] <- this.Load(addr, 8UL) |> int8 |> int64 |> uint64
+
+            // LH
             | 0x1UL -> __regs[rd] <- this.Load(addr, 16UL) |> int16 |> int64 |> uint64
+
+            // LW
             | 0x2UL -> __regs[rd] <- this.Load(addr, 32UL) |> int32 |> int64 |> uint64
+
+            // LD
             | 0x3UL -> __regs[rd] <- this.Load(addr, 64UL)
+
+            // LBU
             | 0x4UL -> __regs[rd] <- this.Load(addr, 8UL)
+
+            // LHU
             | 0x5UL -> __regs[rd] <- this.Load(addr, 16UL)
+
+            // LWU
             | 0x6UL -> __regs[rd] <- this.Load(addr, 32UL)
             | _ -> raise (IllegalInstruction(inst))
 
@@ -99,7 +107,60 @@ type CPU (code : array<uint8>) as self =
             let shamt = (imm &&& 0x3FUL) |> uint32
 
             match funct3 with
-            | 0x0UL -> __regs[rd] <- __regs[rs1] |+| imm
+            | 0x0UL -> __regs[rd] <- UInt64.wrapping_add(__regs[rs1], imm)
+
+            // SLLI
+            | 0x1UL -> __regs[rd] <- __regs[rs1] <<< (shamt |> int32)
+
+            // SLTI
+            | 0x2UL -> __regs[rd] <- if (__regs[rs1] |> int64) < (imm |> int64) then 1 else 0
+
+            // SLTIU
+            | 0x3UL -> __regs[rd] <- if __regs[rs1] < imm then 1UL else 0UL
+
+            // XORI
+            | 0x4UL -> __regs[rd] <- __regs[rs1] ^^^ imm
+
+            // SRLI & SRAI
+            | 0x5UL ->
+                match (funct7 >>> 1) with
+                | 0x00UL -> __regs[rd] <- UInt32.wrapping_shr(__regs[rs1] |> uint32, shamt |> int) |> int32 |> int64 |> uint64
+                | 0x10UL -> __regs[rd] <- Int32.wrapping_shr(__regs[rs1] |> int32, shamt |> int) |> int64 |> uint64
+                | _ -> raise (IllegalInstruction(inst))
+
+            // ORI
+            | 0x6UL -> __regs[rd] <- __regs[rs1] ||| imm
+
+            // ANDI
+            | 0x7UL -> __regs[rd] <- __regs[rs1] &&& imm
+
+            | _ -> raise (IllegalInstruction(inst))
+
+            this.UpdatePC()
+
+        // AUIPC
+        | 0x17UL ->
+            __regs[rd] <- UInt64.wrapping_add(this.PC, ((inst &&& 0xFFFFF000UL) |> int32 |> int64 |> uint64))
+            this.UpdatePC()
+
+        | 0x1BUL ->
+            let imm = ((inst |> int32 |> int64) >>> 20) |> uint64
+            let shamt = (imm &&& 0x1FUL) |> int
+
+            match funct3 with
+            // ADDIW
+            | 0x0UL -> __regs[rd] <- UInt64.wrapping_add(__regs[rs1], imm) |> int32 |> int64 |> uint64
+
+            // SLLIW
+            | 0x1UL -> __regs[rd] <- UInt64.wrapping_shr(__regs[rs1], shamt) |> int32 |> int64 |> uint64
+
+            // SRLIW & SRAIW
+            | 0x5UL ->
+                match funct7 with
+                | 0x00UL -> __regs[rd] <- UInt32.wrapping_shr((__regs[rs1] |> uint32), shamt) |> int32 |> int64 |> uint64
+                | 0x20UL -> __regs[rd] <- Int32.wrapping_shr((__regs[rs1] |> int32),  shamt) |> int64 |> uint64
+                | _ -> raise (IllegalInstruction(inst))
+
             | _ -> raise (IllegalInstruction(inst))
 
             this.UpdatePC()

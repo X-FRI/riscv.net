@@ -8,35 +8,34 @@ type DRAM (code : array<uint8>) =
 
     let __dram : array<uint8> = Array.zeroCreate<uint8> (int (DRAM_SIZE))
     do Array.Copy(code, __dram, code.Length)
-
-    member public _.Load (addr : uint64, size : uint64) : uint64 =
+    
+    /// addr/size must be valid
+    member private _.Check(addr : uint64, size : uint64) : unit =
         match size with
         | 8UL
         | 16UL
         | 32UL
-        | 64UL ->
-            let nbytes : uint64 = size / 8UL in
-            let index : int = int (addr - DRAM_BASE) in
-            let mutable code : uint64 = uint64 __dram[index]
-
-            // shift the bytes to build up the desired value
-            for i = 1 to int (nbytes) do
-                code <- (code ||| ((uint64 (__dram[index + i])) <<< (i * 8)))
-
-            code
+        | 64UL -> ()
         | _ -> raise (LoadAccessFault(addr))
 
-    member public _.Store (addr : uint64, size : uint64, value : uint64) : unit =
-        match size with
-        | 8UL
-        | 16UL
-        | 32UL
-        | 64UL ->
-            let nbytes : uint64 = size / 8UL in
-            let index : int = int (addr - DRAM_BASE) in
+    member public this.Load (addr : uint64, size : uint64) : uint64 =
+        this.Check(addr, size)
+        
+        let nbytes : uint64 = size / 8UL in
+        let index : int = int (addr - DRAM_BASE) in
+        let mutable code : uint64 = uint64 __dram[index]
 
-            // shift the bytes to build up the desired value
-            for i = 0 to int (nbytes) do
-                __dram[index + 1] <- uint8 ((value >>> (8 * i)) &&& 0xFFUL)
+        for i = 1 to int (nbytes) do
+            code <- (code ||| ((uint64 (__dram[index + i])) <<< (i * 8)))
 
-        | _ -> raise (StoreAMOAccessFault(addr))
+        code
+        
+
+    member public this.Store (addr : uint64, size : uint64, value : uint64) : unit =
+        this.Check(addr, size)
+        
+        let nbytes : uint64 = size / 8UL in
+        let index : int = int (addr - DRAM_BASE) in
+
+        for i = 0 to int (nbytes) do
+            __dram[index + 1] <- uint8 ((value >>> (8 * i)) &&& 0xFFUL)

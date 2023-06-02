@@ -6,6 +6,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <Compile Include="Numeric.fs"/>
         <Compile Include="Param.fs"/>
         <Compile Include="Exception.fs"/>
         <Compile Include="DRAM.fs"/>
