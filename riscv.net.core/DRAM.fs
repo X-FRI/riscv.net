@@ -25,8 +25,10 @@ type DRAM (code : array<uint8>) =
         let index = int (addr - DRAM_BASE) in
         let mutable code = uint64 __dram[index]
 
-        for i = 1 to int (nbytes) do
+        for i = 1 to (int (nbytes) - 1) do
             code <- (code ||| ((uint64 (__dram[index + i])) <<< (i * 8)))
+
+        // printfn $"addr = {addr}, size = {size}, nbytes = {nbytes}. index = {index}, code = {code}"
 
         code
 
@@ -37,5 +39,5 @@ type DRAM (code : array<uint8>) =
         let nbytes = size / 8UL in
         let index = int (addr - DRAM_BASE) in
 
-        for i = 0 to int (nbytes) do
+        for i = 0 to int (nbytes) - 1 do
             __dram[index + 1] <- uint8 ((value >>> (8 * i)) &&& 0xFFUL)
