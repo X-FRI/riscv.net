@@ -2,7 +2,7 @@ module RiscV.NET.CPU
 
 
 
-type CPU(code: list<uint8>) =
+type CPU(code: array<uint8>) =
     /// The initial DRAM size is 128MB
     let __DRAM_SIZE: uint64 = 1024UL * 1024UL * 128UL
 
@@ -10,10 +10,10 @@ type CPU(code: list<uint8>) =
     let __Regs: array<uint64> = Array.zeroCreate<uint64> (32)
 
     /// pc register contains the memory address of next instruction
-    let __PC: uint64 = 0UL
+    let mutable __PC: uint64 = 0UL
 
     /// memory, a byte-array. There is no memory in real CPU.
-    let __Dram: list<uint8> = []
+    let __Dram: array<uint8> = code
 
     do
         // The stack pointer register sp (aka x2) should point to the top address of DRAM
@@ -91,4 +91,9 @@ type CPU(code: list<uint8>) =
 
         for i in 0..4..31 do
             printfn
-                $"x{i}({RVABI[i]}) = {__Regs[i]}\tx{i + 1}({RVABI[i + 1]}) = {__Regs[i + 1]}\tx{i + 2}({RVABI[i + 2]}) = {__Regs[i + 2]}\tx{i + 3}({RVABI[i + 3]}) = {__Regs[i + 3]}\n"
+                $"x{i}({RVABI[i]}) = 0x%0x{__Regs[i]}\tx{i + 1}({RVABI[i + 1]}) = 0x%0x{__Regs[i + 1]}\tx{i + 2}({RVABI[i + 2]}) = 0x%0x{__Regs[i + 2]}\tx{i + 3}({RVABI[i + 3]}) = 0x%0x{__Regs[i + 3]}\n"
+
+    member public this.Run() =
+        while __PC < (__Dram.Length |> uint64) do
+            this.Fetch() |> this.Execute
+            __PC <- __PC + 4UL
