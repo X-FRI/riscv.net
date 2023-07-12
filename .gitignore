@@ -7,8 +7,3 @@ obj/
 
 # VSCode
 .vscode
-
-# riscv.net.localhost
-## test riscv binary file
-add-addi
-add-addi.bin
