@@ -1,2 +1,8 @@
-﻿// For more information see https://aka.ms/fsharp-console-apps
-printfn "Hello from F#"
+﻿module RiscV.NET.Program
+
+open CPU
+
+[<EntryPoint>]
+let main args = 
+    CPU([]).DumpRegisters()
+    0
