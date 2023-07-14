@@ -25,6 +25,48 @@ type CPU(__code: array<uint8>) =
         __regs[0] <- 0UL
 
         match opcode with
+        | 0x03UL ->
+            let imm = ((inst |> int32 |> int64) >>> 20) |> uint64
+            let addr = __regs[rs1] + imm
+
+            match funct3 with
+            // lb
+            | 0x0UL ->
+                let value = __bus.Load(addr, 8UL)
+                __regs[rd] <- (value |> int8 |> int64 |> uint64)
+
+            // lh
+            | 0x1UL ->
+                let value = __bus.Load(addr, 16UL)
+                __regs[rd] <- (value |> int16 |> int64 |> uint64)
+
+            // lw
+            | 0x2UL ->
+                let value = __bus.Load(addr, 32UL)
+                __regs[rd] <- (value |> int32 |> int64 |> uint64)
+
+            // ld
+            | 0x3UL ->
+                let value = __bus.Load(addr, 64UL)
+                __regs[rd] <- value
+
+            // lbu
+            | 0x4UL ->
+                let value = __bus.Load(addr, 8UL)
+                __regs[rd] <- value
+
+            // lhu
+            | 0x5UL ->
+                let value = __bus.Load(addr, 16UL)
+                __regs[rd] <- value
+
+            // lwu
+            | 0x6UL ->
+                let value = __bus.Load(addr, 32UL)
+                __regs[rd] <- value
+
+            | _ -> failwith $"Illegal instruction: %X{inst}"
+            
         | 0x13UL ->
             let imm = ((inst &&& 0xfff00000UL) |> int32 |> int64 >>> 20) |> uint64
             let shamt = (imm &&& 0x3fUL) |> uint32
