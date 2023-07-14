@@ -4,6 +4,8 @@
     <TargetFramework>net7.0</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Dram.fs" />
+    <Compile Include="Bus.fs" />
     <Compile Include="CPU.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>

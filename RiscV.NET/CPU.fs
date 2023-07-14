@@ -1,55 +1,54 @@
-module RiscV.NET.CPU
+module RiscV.Net.CPU
 
+open Dram
+open Bus
 
+type CPU(__code: array<uint8>) =
+    let __regs: array<uint64> = Array.zeroCreate<uint64> (32)
+    let __bus: Bus = Bus(__code)
+    let mutable __pc: uint64 = Dram.BASE
 
-type CPU(code: array<uint8>) =
-    /// The initial DRAM size is 128MB
-    let __DRAM_SIZE: uint64 = 1024UL * 1024UL * 128UL
+    do __regs[2] <- Dram.END
 
-    /// RISC-V has 32 registers
-    let __Regs: array<uint64> = Array.zeroCreate<uint64> (32)
+    member public this.Fetch() : uint64 = __bus.Load(__pc, 32UL)
 
-    /// pc register contains the memory address of next instruction
-    let mutable __PC: uint64 = 0UL
+    member private this.UpdatePC() = __pc <- __pc + 4UL
 
-    /// memory, a byte-array. There is no memory in real CPU.
-    let __Dram: array<uint8> = code
+    member public this.Execute(inst: uint64) : unit =
+        let opcode = inst &&& 0x0000007fUL
+        let rd = ((inst &&& 0x00000f80UL) >>> 7) |> int
+        let rs1 = ((inst &&& 0x000f8000UL) >>> 15) |> int
+        let rs2 = ((inst &&& 0x01f00000UL) >>> 20) |> int
+        let funct3 = (inst &&& 0x00007000UL) >>> 12
+        let funct7 = (inst &&& 0xfe000000UL) >>> 25
 
-    do
-        // The stack pointer register sp (aka x2) should point to the top address of DRAM
-        __Regs[2] <- __DRAM_SIZE - 1UL
+        __regs[0] <- 0UL
 
-    /// CPU use pc as a base address to fetch 4 continous bytes from DRAM, since RISC-V instruction is 32-bit.
-    /// Here, we read the uint8 on [__PC; __PC + 1; __PC + 2; __PC + 3] and build up a uint32.
-    member public this.Fetch() : uint32 =
-        let index = int (__PC)
-
-        (__Dram[index] |> uint32)
-        ||| ((__Dram[index + 1] |> uint32) <<< 8)
-        ||| ((__Dram[index + 2] |> uint32) <<< 16)
-        ||| ((__Dram[index + 3] |> uint32) <<< 24)
-
-    member public this.Execute(inst: uint32) =
-        // decode as R-type
-        let opcode = inst &&& 0x7fu
-        let rd = (inst >>> 7) &&& 0x1fu |> int
-        let rs1 = (inst >>> 15) &&& 0x1fu |> int
-        let rs2 = (inst >>> 20) &&& 0x1fu |> int
-        let funct3 = (inst >>> 12) &&& 0x7u
-        let funct3 = (inst >>> 25) &&& 0x7fu
-
-        // x0 is hardwired zero
-        __Regs[0] <- 0UL
-
-        // execute stage
         match opcode with
-        // addi
-        | 0x13u -> __Regs[rd] <- __Regs[rs1] + (((inst &&& 0xfff0_0000u) |> int64 >>> 20) |> uint64)
+        | 0x13UL ->
+            let imm = ((inst &&& 0xfff00000UL) |> int32 |> int64 >>> 20) |> uint64
+            let shamt = (imm &&& 0x3fUL) |> uint32
 
-        // add
-        | 0x33u -> __Regs[rd] <- __Regs[rs1] + __Regs[rs2]
+            match funct3 with
+            // addi
+            | 0x0UL -> __regs[rd] <- (__regs[rs1] + imm)
+            | _ -> failwith $"Illegal instruction: %X{inst}"
 
-        | _ -> failwith $"Invalid opcode: {opcode}"
+        | 0x33UL ->
+            // "SLL, SRL, and SRA perform logical left, logical right, and arithmetic right
+            // shifts on the value in register rs1 by the shift amount held in register rs2.
+            // In RV64I, only the low 6 bits of rs2 are considered for the shift amount."
+            let shamt = ((__regs[rs2] &&& 0x3fUL) |> uint64) |> uint32
+
+            match (funct3, funct7) with
+            // add
+            | (0x0UL, 0x00UL) -> __regs[rd] <- (__regs[rs1] + __regs[rs2])
+            | _ -> failwith $"Illegal instruction: %X{inst}"
+
+        | _ -> failwith $"Illegal instruction: %X{inst}"
+
+        this.UpdatePC()
+
 
     member public this.DumpRegisters() =
         let RVABI =
@@ -87,13 +86,15 @@ type CPU(code: array<uint8>) =
                "t6" |]
 
         printfn $"o- Registers"
-        __Regs[0] <- 0UL
+        __regs[0] <- 0UL
 
         for i in 0..4..31 do
             printfn
-                $"x{i}({RVABI[i]}) = 0x%0x{__Regs[i]}\tx{i + 1}({RVABI[i + 1]}) = 0x%0x{__Regs[i + 1]}\tx{i + 2}({RVABI[i + 2]}) = 0x%0x{__Regs[i + 2]}\tx{i + 3}({RVABI[i + 3]}) = 0x%0x{__Regs[i + 3]}\n"
+                $"x{i}({RVABI[i]}) = 0x%0x{__regs[i]}\tx{i + 1}({RVABI[i + 1]}) = 0x%0x{__regs[i + 1]}\tx{i + 2}({RVABI[i + 2]}) = 0x%0x{__regs[i + 2]}\tx{i + 3}({RVABI[i + 3]}) = 0x%0x{__regs[i + 3]}\n"
 
     member public this.Run() =
-        while __PC < (__Dram.Length |> uint64) do
-            this.Fetch() |> this.Execute
-            __PC <- __PC + 4UL
+        try
+            while true do
+                this.Fetch() |> this.Execute
+        with _ ->
+            this.DumpRegisters()
