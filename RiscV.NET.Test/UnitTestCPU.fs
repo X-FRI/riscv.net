@@ -1,7 +1,7 @@
-module Riscv.NET.Test.CPU
+module RiscV.NET.Test.CPU
 
 open NUnit.Framework
-open RiscV.NET.CPU
+open RiscV.Net.CPU
 
 [<Test>]
 let ``Test addi and add`` () =

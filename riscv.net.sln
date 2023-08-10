@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "RiscV.NET", "RiscV.NET\RiscV.NET.fsproj", "{739A36C5-1A11-41EB-8EE0-0F50DCA4300D}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Riscv.NET.Test", "Riscv.NET.Test\Riscv.NET.Test.fsproj", "{7CAA657C-9969-49DA-AE09-E1AE97886261}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "RiscV.NET.Test", "RiscV.NET.Test\RiscV.NET.Test.fsproj", "{7CAA657C-9969-49DA-AE09-E1AE97886261}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -90,8 +90,6 @@ type CPU(__code: array<uint8>) =
         | _ -> failwith $"Illegal instruction: %X{inst}"
 
         this.UpdatePC()
-
-
     member public this.DumpRegisters() =
         let RVABI =
             [| "zero"
