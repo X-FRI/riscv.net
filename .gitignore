@@ -7,3 +7,6 @@ obj/
 
 # VSCode
 .vscode
+
+*.bin
+*.obj
