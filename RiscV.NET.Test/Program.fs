@@ -34,8 +34,6 @@ module Tests =
                     fail cpu err
             | _ -> fail cpu err
 
-
-
 module Program =
 
     [<EntryPoint>]

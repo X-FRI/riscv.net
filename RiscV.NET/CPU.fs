@@ -73,27 +73,21 @@ let execute cpu inst =
         // lb
         | 0x0UL ->
             Result.map (fun value -> cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)) (Bus.load cpu.bus addr 8UL)
-
         // lh
         | 0x1UL ->
             Result.map (fun value -> cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)) (Bus.load cpu.bus addr 16UL)
-
         // lw
         | 0x2UL ->
             Result.map (fun value -> cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)) (Bus.load cpu.bus addr 32UL)
-
         // ld
         | 0x3UL ->
             Result.map (fun value -> cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)) (Bus.load cpu.bus addr 64UL)
-
         // lbu
         | 0x4UL ->
             Result.map (fun value -> cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)) (Bus.load cpu.bus addr 8UL)
-
         // lhu
         | 0x5UL ->
             Result.map (fun value -> cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)) (Bus.load cpu.bus addr 16UL)
-
         // lwu
         | 0x6UL ->
             Result.map (fun value -> cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)) (Bus.load cpu.bus addr 32UL)
@@ -107,6 +101,33 @@ let execute cpu inst =
         match funct3 with
         // addi
         | 0x0UL -> Ok(cpu.regs[rd] <- (cpu.regs[rs1] + imm))
+        // slli
+        | 0x1UL -> Ok(cpu.regs[rd] <- (cpu.regs[rs1] <<< (shamt |> int32)))
+        // slti
+        | 0x2UL ->
+            Ok(
+                cpu.regs[rd] <-
+                    if (cpu.regs[rs1] |> int64) < (imm |> int64) then
+                        1UL
+                    else
+                        0UL
+            )
+        // sltiu
+        | 0x3UL -> Ok(cpu.regs[rd] <- if cpu.regs[rs1] < imm then 1UL else 0UL)
+        // xori
+        | 0x4UL -> Ok(cpu.regs[rd] <- (cpu.regs[rs1] ^^^ imm))
+        | 0x5UL ->
+            match funct7 >>> 1 with
+            // srli
+            | 0x00UL -> Ok(cpu.regs[rd] <- (cpu.regs[rs1] >>> (shamt |> int32)))
+            // srai
+            | 0x10UL -> Ok(cpu.regs[rd] <- (((cpu.regs[rs1] |> int64) >>> (shamt |> int32) |> uint64)))
+            | _ -> Error(Error.IllegalInstruction inst)
+
+        // ori
+        | 0x6UL -> Ok(cpu.regs[rd] <- (cpu.regs[rs1] ||| imm))
+        // andi
+        | 0x7UL -> Ok(cpu.regs[rd] <- (cpu.regs[rs1] &&& imm))
         | _ -> Error(Error.IllegalInstruction inst)
 
     | 0x33UL ->
