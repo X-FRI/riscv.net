@@ -43,6 +43,10 @@ type t =
       bus: Bus.t
       mutable pc: uint64 }
 
+type pc_update_state =
+    | Auto of unit
+    | Custom of uint64
+
 let init code =
     let regs = Regs.init ()
     regs[2] <- Dram.END
@@ -52,7 +56,11 @@ let init code =
       pc = Dram.BASE }
 
 let fetch cpu = Bus.load cpu.bus cpu.pc 32UL
-let update_pc cpu = cpu.pc <- cpu.pc + 4UL
+
+let update_pc cpu pc_update_state =
+    match pc_update_state with
+    | Auto() -> cpu.pc <- cpu.pc + 4UL
+    | Custom new_pc -> cpu.pc <- new_pc
 
 let execute cpu inst =
     let opcode = inst &&& 0x0000007fUL
@@ -72,25 +80,39 @@ let execute cpu inst =
         match funct3 with
         // lb
         | 0x0UL ->
-            Result.map (fun value -> cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)) (Bus.load cpu.bus addr 8UL)
+            Result.map
+                (fun value -> Auto(cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)))
+                (Bus.load cpu.bus addr 8UL)
         // lh
         | 0x1UL ->
-            Result.map (fun value -> cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)) (Bus.load cpu.bus addr 16UL)
+            Result.map
+                (fun value -> Auto(cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)))
+                (Bus.load cpu.bus addr 16UL)
         // lw
         | 0x2UL ->
-            Result.map (fun value -> cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)) (Bus.load cpu.bus addr 32UL)
+            Result.map
+                (fun value -> Auto(cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)))
+                (Bus.load cpu.bus addr 32UL)
         // ld
         | 0x3UL ->
-            Result.map (fun value -> cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)) (Bus.load cpu.bus addr 64UL)
+            Result.map
+                (fun value -> Auto(cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)))
+                (Bus.load cpu.bus addr 64UL)
         // lbu
         | 0x4UL ->
-            Result.map (fun value -> cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)) (Bus.load cpu.bus addr 8UL)
+            Result.map
+                (fun value -> Auto(cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)))
+                (Bus.load cpu.bus addr 8UL)
         // lhu
         | 0x5UL ->
-            Result.map (fun value -> cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)) (Bus.load cpu.bus addr 16UL)
+            Result.map
+                (fun value -> Auto(cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)))
+                (Bus.load cpu.bus addr 16UL)
         // lwu
         | 0x6UL ->
-            Result.map (fun value -> cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)) (Bus.load cpu.bus addr 32UL)
+            Result.map
+                (fun value -> Auto(cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)))
+                (Bus.load cpu.bus addr 32UL)
 
         | _ -> Error(Error.IllegalInstruction inst)
 
@@ -100,50 +122,197 @@ let execute cpu inst =
 
         match funct3 with
         // addi
-        | 0x0UL -> Ok(cpu.regs[rd] <- (cpu.regs[rs1] + imm))
+        | 0x0UL -> Ok(Auto(cpu.regs[rd] <- (cpu.regs[rs1] + imm)))
         // slli
-        | 0x1UL -> Ok(cpu.regs[rd] <- (cpu.regs[rs1] <<< (shamt |> int32)))
+        | 0x1UL -> Ok(Auto(cpu.regs[rd] <- (cpu.regs[rs1] <<< (shamt |> int32))))
         // slti
         | 0x2UL ->
             Ok(
-                cpu.regs[rd] <-
-                    if (cpu.regs[rs1] |> int64) < (imm |> int64) then
-                        1UL
-                    else
-                        0UL
+                Auto(
+                    cpu.regs[rd] <-
+                        if (cpu.regs[rs1] |> int64) < (imm |> int64) then
+                            1UL
+                        else
+                            0UL
+                )
             )
         // sltiu
-        | 0x3UL -> Ok(cpu.regs[rd] <- if cpu.regs[rs1] < imm then 1UL else 0UL)
+        | 0x3UL -> Ok(Auto(cpu.regs[rd] <- if cpu.regs[rs1] < imm then 1UL else 0UL))
         // xori
-        | 0x4UL -> Ok(cpu.regs[rd] <- (cpu.regs[rs1] ^^^ imm))
+        | 0x4UL -> Ok(Auto(cpu.regs[rd] <- (cpu.regs[rs1] ^^^ imm)))
         | 0x5UL ->
             match funct7 >>> 1 with
             // srli
-            | 0x00UL -> Ok(cpu.regs[rd] <- (cpu.regs[rs1] >>> (shamt |> int32)))
+            | 0x00UL -> Ok(Auto(cpu.regs[rd] <- (cpu.regs[rs1] >>> (shamt |> int32))))
             // srai
-            | 0x10UL -> Ok(cpu.regs[rd] <- (((cpu.regs[rs1] |> int64) >>> (shamt |> int32) |> uint64)))
+            | 0x10UL -> Ok(Auto(cpu.regs[rd] <- (((cpu.regs[rs1] |> int64) >>> (shamt |> int32) |> uint64))))
             | _ -> Error(Error.IllegalInstruction inst)
 
         // ori
-        | 0x6UL -> Ok(cpu.regs[rd] <- (cpu.regs[rs1] ||| imm))
+        | 0x6UL -> Ok(Auto(cpu.regs[rd] <- (cpu.regs[rs1] ||| imm)))
         // andi
-        | 0x7UL -> Ok(cpu.regs[rd] <- (cpu.regs[rs1] &&& imm))
+        | 0x7UL -> Ok(Auto(cpu.regs[rd] <- (cpu.regs[rs1] &&& imm)))
         | _ -> Error(Error.IllegalInstruction inst)
 
+    // auipc
+    | 0x17UL ->
+        let imm = (inst &&& 0xfffff000UL) |> int32 |> int64 |> uint64
+        Ok(Auto(cpu.regs[rd] <- (cpu.pc + imm)))
+
+    | 0x1bUL ->
+        let imm = ((inst |> int32 |> int64) >>> 20) |> uint64
+        let shamt = (imm &&& 0x1fUL) |> uint32
+
+        match funct3 with
+        // addiw
+        | 0x0UL -> Ok(Auto(cpu.regs[rd] <- ((cpu.regs[rs1] + imm) |> int32 |> int64 |> uint64)))
+        // slliw
+        | 0x1UL -> Ok(Auto(cpu.regs[rd] <- ((cpu.regs[rs1] >>> (shamt |> int32)) |> int32 |> int64 |> uint64)))
+        | 0x5UL ->
+            match funct7 with
+            // srliw
+            | 0x00UL ->
+                Ok(Auto(cpu.regs[rd] <- (((cpu.regs[rs1] |> uint32) >>> (shamt |> int32)) |> int32 |> int64 |> uint64)))
+            // sraiw
+            | 0x20UL -> Ok(Auto(cpu.regs[rd] <- (((cpu.regs[rs1] |> int32) >>> (shamt |> int32)) |> int64 |> uint64)))
+            | _ -> Error(Error.IllegalInstruction inst)
+        | _ -> Error(Error.IllegalInstruction inst)
+    | 0x23UL ->
+        let imm =
+            (((inst &&& 0xfe000000UL) |> int32 |> int64 >>> 20) |> uint64)
+            ||| ((inst >>> 7) &&& 0x1fUL)
+
+        let addr = cpu.regs[rs1] + imm
+
+        match funct3 with
+        | 0x0UL -> Result.map (fun () -> Auto()) (Bus.store cpu.bus addr 8UL cpu.regs[rs2])
+        | 0x1UL -> Result.map (fun () -> Auto()) (Bus.store cpu.bus addr 16UL cpu.regs[rs2])
+        | 0x2UL -> Result.map (fun () -> Auto()) (Bus.store cpu.bus addr 32UL cpu.regs[rs2])
+        | 0x3UL -> Result.map (fun () -> Auto()) (Bus.store cpu.bus addr 64UL cpu.regs[rs2])
+        | _ -> failwith "Unreachable!!!!!!!"
     | 0x33UL ->
-        // "SLL, SRL, and SRA perform logical left, logical right, and arithmetic right
-        // shifts on the value in register rs1 by the shift amount held in register rs2.
-        // In RV64I, only the low 6 bits of rs2 are considered for the shift amount."
         let shamt = ((cpu.regs[rs2] &&& 0x3fUL) |> uint64) |> uint32
 
         match (funct3, funct7) with
         // add
-        | (0x0UL, 0x00UL) -> Ok(cpu.regs[rd] <- (cpu.regs[rs1] + cpu.regs[rs2]))
+        | (0x0UL, 0x00UL) -> Ok(Auto(cpu.regs[rd] <- (cpu.regs[rs1] + cpu.regs[rs2])))
+        // mul
+        | (0x0UL, 0x01UL) -> Ok(Auto(cpu.regs[rd] <- (cpu.regs[rs1] + cpu.regs[rs2])))
+        // sub
+        | (0x0UL, 0x20UL) -> Ok(Auto(cpu.regs[rd] <- (cpu.regs[rs1] + cpu.regs[rs2])))
+        // sll
+        | (0x1UL, 0x00UL) -> Ok(Auto(cpu.regs[rd] <- (cpu.regs[rs1] + (shamt |> uint64))))
+        // slt
+        | (0x2UL, 0x00UL) ->
+            Ok(
+                Auto(
+                    cpu.regs[rd] <-
+                        (if (cpu.regs[rs1] |> int64) < (cpu.regs[rs2] |> int64) then
+                             1UL
+                         else
+                             0UL)
+                )
+            )
+        // sltu
+        | (0x3UL, 0x00UL) -> Ok(Auto(cpu.regs[rd] <- (if cpu.regs[rs1] < cpu.regs[rs2] then 1UL else 0UL)))
+        // xor
+        | (0x4UL, 0x00UL) -> Ok(Auto(cpu.regs[rd] <- (cpu.regs[rs1] ^^^ cpu.regs[rs2])))
+        // srl
+        | (0x5UL, 0x00UL) -> Ok(Auto(cpu.regs[rd] <- (cpu.regs[rs1] >>> (shamt |> int32))))
+        // sra
+        | (0x5UL, 0x20UL) -> Ok(Auto(cpu.regs[rd] <- (((cpu.regs[rs1] |> int64) >>> (shamt |> int32)) |> uint64)))
+        // or
+        | (0x6UL, 0x00UL) -> Ok(Auto(cpu.regs[rd] <- (cpu.regs[rs1] ||| cpu.regs[rs2])))
+        // and
+        | (0x7UL, 0x00UL) -> Ok(Auto(cpu.regs[rd] <- (cpu.regs[rs1] &&& cpu.regs[rs2])))
         | _ -> Error(Error.IllegalInstruction inst)
+    // lui
+    | 0x37UL -> Ok(Auto(cpu.regs[rd] <- ((inst &&& 0xfffff000UL) |> int32 |> int64 |> uint64)))
+    | 0x3bUL ->
+        let shamt = (cpu.regs[rs2] &&& 0x1fUL) |> uint32
+
+        match (funct3, funct7) with
+        // addw
+        | (0x0UL, 0x00UL) -> Ok(Auto(cpu.regs[rd] <- ((cpu.regs[rs1] + (cpu.regs[rs2])) |> int32 |> int64 |> uint64)))
+        // subw
+        | (0x0UL, 0x20UL) -> Ok(Auto(cpu.regs[rd] <- (((cpu.regs[rs1] - (cpu.regs[rs2])) |> int32) |> uint64)))
+        // sllw
+        | (0x1UL, 0x00UL) ->
+            Ok(Auto(cpu.regs[rd] <- ((((cpu.regs[rs1] |> uint32) <<< (shamt |> int32)) |> int32 |> uint64))))
+        // srlw
+        | (0x5UL, 0x00UL) ->
+            Ok(Auto(cpu.regs[rd] <- (((cpu.regs[rs1] |> uint32) >>> (shamt |> int32)) |> int32 |> uint64)))
+        // sraw
+        | (0x5UL, 0x20UL) -> Ok(Auto(cpu.regs[rd] <- ((cpu.regs[rs1] |> int32) >>> (shamt |> int32)) |> uint64))
+        | _ -> Error(Error.IllegalInstruction inst)
+    | 0x63UL ->
+        let imm =
+            (((inst &&& 0x80000000UL) |> int32 |> int64 >>> 19) |> uint64)
+            ||| ((inst &&& 0x80UL) <<< 4)
+            ||| ((inst >>> 20) &&& 0x7e0UL)
+            ||| ((inst >>> 7) &&& 0x1eUL)
+
+        match funct3 with
+        // beq
+        | 0x0UL ->
+            if cpu.regs[rs1] = cpu.regs[rs2] then
+                Ok(Custom(cpu.pc + imm))
+            else
+                failwith "Unreachable!!!!!!!"
+        // bne
+        | 0x1UL ->
+            if cpu.regs[rs1] <> cpu.regs[rs2] then
+                Ok(Custom(cpu.pc + imm))
+            else
+                failwith "Unreachable!!!!!!!"
+        // blt
+        | 0x4UL ->
+            if (cpu.regs[rs1] |> int64) < (cpu.regs[rs2] |> int64) then
+                Ok(Custom(cpu.pc + imm))
+            else
+                failwith "Unreachable!!!!!!!"
+        // bge
+        | 0x5UL ->
+            if (cpu.regs[rs1] |> int64) >= (cpu.regs[rs2] |> int64) then
+                Ok(Custom(cpu.pc + imm))
+            else
+                failwith "Unreachable!!!!!!!"
+        // bltu
+        | 0x6UL ->
+            if cpu.regs[rs1] < cpu.regs[rs2] then
+                Ok(Custom(cpu.pc + imm))
+            else
+                failwith "Unreachable!!!!!!!"
+        // bgeu
+        | 0x7UL ->
+            if cpu.regs[rs1] >= cpu.regs[rs2] then
+                Ok(Custom(cpu.pc + imm))
+            else
+                failwith "Unreachable!!!!!!!"
+        | _ -> Error(Error.IllegalInstruction inst)
+    // jalr
+    | 0x67UL ->
+        let t = cpu.pc + 4UL
+        let imm = ((((inst &&& 0xfff00000UL) |> int32) |> int64) >>> 20) |> uint64
+        let new_pc = (cpu.regs[rs1] + imm) &&& ((~~~ 1) |> uint64)
+        cpu.regs[rd] <- t
+        Ok(Custom(new_pc))
+
+    // jal
+    | 0x6fUL ->
+        cpu.regs[rd] <- (cpu.pc + 4UL)
+
+        let imm =
+            (((inst &&& 0x80000000UL) |> int32 |> int64 >>> 11) |> uint64)
+            ||| (inst &&& 0xff000UL)
+            ||| ((inst >>> 9) &&& 0x800UL)
+            ||| ((inst >>> 20) &&& 0x7feUL)
+
+        Ok(Custom(cpu.pc + imm))
 
     | _ -> Error(Error.IllegalInstruction inst)
 
-    |> Result.map (fun _ -> update_pc cpu)
+    |> Result.map (fun state -> update_pc cpu state)
 
 
 let dump_regs cpu =
