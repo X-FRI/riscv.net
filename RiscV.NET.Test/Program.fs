@@ -1,38 +1,15 @@
+module RiscV.Net.Test.Program
+
 open NUnit.Framework
 open RiscV.Net
 open System.IO
 
 [<TestFixture>]
-module Tests =
-    let TEST_BINARY_PATH = "../../../../TestBinary"
-
-    let fail cpu err =
-        CPU.dump_regs cpu
-        Assert.Fail $"{Error.to_string err}"
-
+module ASMTests =
     [<Test>]
-    let ``add-addi.bin`` () =
-        let cpu =
-            CPU.init (File.ReadAllBytes($"{TEST_BINARY_PATH}/add-addi.bin") |> Array.map uint8)
-
-        match CPU.run cpu with
-        | Ok() ->
-            CPU.dump_regs cpu
-            Assert.Fail()
-
-        | Error err ->
-            match err with
-            | Error.IllegalInstruction 0UL ->
-                if
-                    cpu.regs[31] = 0x2aUL
-                    && cpu.regs[30] = 0x25UL
-                    && cpu.regs[2] = 0x87ffffffUL
-                    && cpu.regs[29] = 0x5UL
-                then
-                    Assert.Pass()
-                else
-                    fail cpu err
-            | _ -> fail cpu err
+    let ```test addi`` () =
+        let code = "addi x31, x0, 42"
+        Utils.riscv_test code "test_addi" 1 (fun cpu -> cpu.regs[31] = 42UL)
 
 module Program =
 
