@@ -1,141 +1,139 @@
 module RiscV.Net.CPU
 
-open Dram
-open Bus
+module Regs =
+    type t = array<uint64>
+    let init () = Array.zeroCreate<uint64> (32)
 
-type CPU(__code: array<uint8>) =
-    let __regs: array<uint64> = Array.zeroCreate<uint64> (32)
-    let __bus: Bus = Bus(__code)
-    let mutable __pc: uint64 = Dram.BASE
+    let RVABI =
+        [| "zero"
+           "ra"
+           "sp"
+           "gp"
+           "tp"
+           "t0"
+           "t1"
+           "t2"
+           "s0"
+           "s1"
+           "a0"
+           "a1"
+           "a2"
+           "a3"
+           "a4"
+           "a5"
+           "a6"
+           "a7"
+           "s2"
+           "s3"
+           "s4"
+           "s5"
+           "s6"
+           "s7"
+           "s8"
+           "s9"
+           "s10"
+           "s11"
+           "t3"
+           "t4"
+           "t5"
+           "t6" |]
 
-    do __regs[2] <- Dram.END
+type t =
+    { regs: Regs.t
+      bus: Bus.t
+      mutable pc: uint64 }
 
-    member public this.Fetch() : uint64 = __bus.Load(__pc, 32UL)
+let init code =
+    let regs = Regs.init ()
+    regs[2] <- Dram.END
 
-    member private this.UpdatePC() = __pc <- __pc + 4UL
+    { regs = regs
+      bus = Bus.init (Dram.init code)
+      pc = Dram.BASE }
 
-    member public this.Execute(inst: uint64) : unit =
-        let opcode = inst &&& 0x0000007fUL
-        let rd = ((inst &&& 0x00000f80UL) >>> 7) |> int
-        let rs1 = ((inst &&& 0x000f8000UL) >>> 15) |> int
-        let rs2 = ((inst &&& 0x01f00000UL) >>> 20) |> int
-        let funct3 = (inst &&& 0x00007000UL) >>> 12
-        let funct7 = (inst &&& 0xfe000000UL) >>> 25
+let fetch cpu = Bus.load cpu.bus cpu.pc 32UL
+let update_pc cpu = cpu.pc <- cpu.pc + 4UL
 
-        __regs[0] <- 0UL
+let execute cpu inst =
+    let opcode = inst &&& 0x0000007fUL
+    let rd = ((inst &&& 0x00000f80UL) >>> 7) |> int
+    let rs1 = ((inst &&& 0x000f8000UL) >>> 15) |> int
+    let rs2 = ((inst &&& 0x01f00000UL) >>> 20) |> int
+    let funct3 = (inst &&& 0x00007000UL) >>> 12
+    let funct7 = (inst &&& 0xfe000000UL) >>> 25
 
-        match opcode with
-        | 0x03UL ->
-            let imm = ((inst |> int32 |> int64) >>> 20) |> uint64
-            let addr = __regs[rs1] + imm
+    cpu.regs[0] <- 0UL
 
-            match funct3 with
-            // lb
-            | 0x0UL ->
-                let value = __bus.Load(addr, 8UL)
-                __regs[rd] <- (value |> int8 |> int64 |> uint64)
+    match opcode with
+    | 0x03UL ->
+        let imm = ((inst |> int32 |> int64) >>> 20) |> uint64
+        let addr = cpu.regs[rs1] + imm
 
-            // lh
-            | 0x1UL ->
-                let value = __bus.Load(addr, 16UL)
-                __regs[rd] <- (value |> int16 |> int64 |> uint64)
+        match funct3 with
+        // lb
+        | 0x0UL ->
+            Result.map (fun value -> cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)) (Bus.load cpu.bus addr 8UL)
 
-            // lw
-            | 0x2UL ->
-                let value = __bus.Load(addr, 32UL)
-                __regs[rd] <- (value |> int32 |> int64 |> uint64)
+        // lh
+        | 0x1UL ->
+            Result.map (fun value -> cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)) (Bus.load cpu.bus addr 16UL)
 
-            // ld
-            | 0x3UL ->
-                let value = __bus.Load(addr, 64UL)
-                __regs[rd] <- value
+        // lw
+        | 0x2UL ->
+            Result.map (fun value -> cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)) (Bus.load cpu.bus addr 32UL)
 
-            // lbu
-            | 0x4UL ->
-                let value = __bus.Load(addr, 8UL)
-                __regs[rd] <- value
+        // ld
+        | 0x3UL ->
+            Result.map (fun value -> cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)) (Bus.load cpu.bus addr 64UL)
 
-            // lhu
-            | 0x5UL ->
-                let value = __bus.Load(addr, 16UL)
-                __regs[rd] <- value
+        // lbu
+        | 0x4UL ->
+            Result.map (fun value -> cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)) (Bus.load cpu.bus addr 8UL)
 
-            // lwu
-            | 0x6UL ->
-                let value = __bus.Load(addr, 32UL)
-                __regs[rd] <- value
+        // lhu
+        | 0x5UL ->
+            Result.map (fun value -> cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)) (Bus.load cpu.bus addr 16UL)
 
-            | _ -> failwith $"Illegal instruction: %X{inst}"
+        // lwu
+        | 0x6UL ->
+            Result.map (fun value -> cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)) (Bus.load cpu.bus addr 32UL)
 
-        | 0x13UL ->
-            let imm = ((inst &&& 0xfff00000UL) |> int32 |> int64 >>> 20) |> uint64
-            let shamt = (imm &&& 0x3fUL) |> uint32
+        | _ -> Error(Error.IllegalInstruction inst)
 
-            match funct3 with
-            // addi
-            | 0x0UL -> __regs[rd] <- (__regs[rs1] + imm)
-            | _ -> failwith $"Illegal instruction: %X{inst}"
+    | 0x13UL ->
+        let imm = ((inst &&& 0xfff00000UL) |> int32 |> int64 >>> 20) |> uint64
+        let shamt = (imm &&& 0x3fUL) |> uint32
 
-        | 0x33UL ->
-            // "SLL, SRL, and SRA perform logical left, logical right, and arithmetic right
-            // shifts on the value in register rs1 by the shift amount held in register rs2.
-            // In RV64I, only the low 6 bits of rs2 are considered for the shift amount."
-            let shamt = ((__regs[rs2] &&& 0x3fUL) |> uint64) |> uint32
+        match funct3 with
+        // addi
+        | 0x0UL -> Ok(cpu.regs[rd] <- (cpu.regs[rs1] + imm))
+        | _ -> Error(Error.IllegalInstruction inst)
 
-            match (funct3, funct7) with
-            // add
-            | (0x0UL, 0x00UL) -> __regs[rd] <- (__regs[rs1] + __regs[rs2])
-            | _ -> failwith $"Illegal instruction: %X{inst}"
+    | 0x33UL ->
+        // "SLL, SRL, and SRA perform logical left, logical right, and arithmetic right
+        // shifts on the value in register rs1 by the shift amount held in register rs2.
+        // In RV64I, only the low 6 bits of rs2 are considered for the shift amount."
+        let shamt = ((cpu.regs[rs2] &&& 0x3fUL) |> uint64) |> uint32
 
-        | _ -> failwith $"Illegal instruction: %X{inst}"
+        match (funct3, funct7) with
+        // add
+        | (0x0UL, 0x00UL) -> Ok(cpu.regs[rd] <- (cpu.regs[rs1] + cpu.regs[rs2]))
+        | _ -> Error(Error.IllegalInstruction inst)
 
-        this.UpdatePC()
+    | _ -> Error(Error.IllegalInstruction inst)
 
-    member public this.DumpRegisters() =
-        let RVABI =
-            [| "zero"
-               "ra"
-               "sp"
-               "gp"
-               "tp"
-               "t0"
-               "t1"
-               "t2"
-               "s0"
-               "s1"
-               "a0"
-               "a1"
-               "a2"
-               "a3"
-               "a4"
-               "a5"
-               "a6"
-               "a7"
-               "s2"
-               "s3"
-               "s4"
-               "s5"
-               "s6"
-               "s7"
-               "s8"
-               "s9"
-               "s10"
-               "s11"
-               "t3"
-               "t4"
-               "t5"
-               "t6" |]
+    |> Result.map (fun _ -> update_pc cpu)
 
-        printfn $"o- Registers"
-        __regs[0] <- 0UL
 
-        for i in 0..4..31 do
-            printfn
-                $"x{i}({RVABI[i]}) = 0x%0x{__regs[i]}\tx{i + 1}({RVABI[i + 1]}) = 0x%0x{__regs[i + 1]}\tx{i + 2}({RVABI[i + 2]}) = 0x%0x{__regs[i + 2]}\tx{i + 3}({RVABI[i + 3]}) = 0x%0x{__regs[i + 3]}\n"
+let dump_regs cpu =
+    printfn $"o- Registers"
+    cpu.regs[0] <- 0UL
 
-    member public this.Run() =
-        try
-            while true do
-                this.Fetch() |> this.Execute
-        with _ ->
-            this.DumpRegisters()
+    for i in 0..4..31 do
+        printfn
+            $"x{i}({Regs.RVABI[i]}) = 0x%0x{cpu.regs[i]}\tx{i + 1}({Regs.RVABI[i + 1]}) = 0x%0x{cpu.regs[i + 1]}\tx{i + 2}({Regs.RVABI[i + 2]}) = 0x%0x{cpu.regs[i + 2]}\tx{i + 3}({Regs.RVABI[i + 3]}) = 0x%0x{cpu.regs[i + 3]}"
+
+let rec run cpu =
+    match fetch cpu |> Result.bind (fun inst -> execute cpu inst) with
+    | Ok() -> run cpu
+    | err -> err

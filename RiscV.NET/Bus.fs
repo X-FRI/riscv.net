@@ -1,18 +1,17 @@
 module RiscV.Net.Bus
 
-open Dram
+type t = { dram: Dram.t }
 
-type Bus(__code: array<uint8>) =
-    let __dram: Dram = Dram(__code)
+let init dram = { dram = dram }
 
-    member public this.Load(addr: uint64, size: uint64) =
-        if addr >= Dram.BASE && addr <= Dram.END then
-            __dram.Load(addr, size)
-        else
-            failwith $"Load access fault: {addr}"
+let load bus addr size =
+    if addr >= Dram.BASE && addr <= Dram.END then
+        Dram.load bus.dram addr size
+    else
+        Error (Error.LoadAccessFault addr)
 
-    member public this.Store(addr: uint64, size: uint64, value: uint64) =
-        if addr >= Dram.BASE && addr <= Dram.END then
-            __dram.Store(addr, size, value)
-        else
-            failwith $"Store AMO access fault: {addr}"
+let store bus addr size value =
+    if addr >= Dram.BASE && addr <= Dram.END then
+        Dram.store bus.dram addr size value
+    else
+        Error (Error.StoreAMOAccessFault addr)

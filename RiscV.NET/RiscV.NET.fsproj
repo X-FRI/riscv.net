@@ -1,13 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <OutputType>Exe</OutputType>
-        <TargetFramework>net7.0</TargetFramework>
-    </PropertyGroup>
-    <ItemGroup>
-        <Compile Include="Exception.fs"/>
-        <Compile Include="Dram.fs"/>
-        <Compile Include="Bus.fs"/>
-        <Compile Include="CPU.fs"/>
-        <Compile Include="Program.fs"/>
-    </ItemGroup>
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net7.0</TargetFramework>
+    <OtherFlags>--mlcompatibility</OtherFlags>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Error.fs" />
+    <Compile Include="Dram.fs" />
+    <Compile Include="Bus.fs" />
+    <Compile Include="CPU.fs" />
+    <Compile Include="Program.fs" />
+  </ItemGroup>
 </Project>
