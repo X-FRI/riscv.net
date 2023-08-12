@@ -4,11 +4,12 @@ open System.IO
 
 [<TestFixture>]
 module Tests =
-    let TEST_BINARY_PATH = "../../../../TestBinary";
+    let TEST_BINARY_PATH = "../../../../TestBinary"
 
     [<Test>]
-    let ``add-addi.bin`` () = 
-        CPU(File.ReadAllBytes($"{TEST_BINARY_PATH}/add-addi.bin") |> Array.map uint8).Run()
+    let ``add-addi.bin`` () =
+        CPU(File.ReadAllBytes($"{TEST_BINARY_PATH}/add-addi.bin") |> Array.map uint8)
+            .Run()
 
 module Program =
 

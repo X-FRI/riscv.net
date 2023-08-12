@@ -40,5 +40,5 @@ type Dram(__code: array<uint8>) =
 
             for i = 1 to nbytes do
                 __dram[index + i] <- ((value >>> (8 * i)) &&& 0xffUL) |> uint8
-
+                
         | _ -> failwith $"Store AMO access fault: {addr}"

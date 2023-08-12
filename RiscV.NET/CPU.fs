@@ -66,7 +66,7 @@ type CPU(__code: array<uint8>) =
                 __regs[rd] <- value
 
             | _ -> failwith $"Illegal instruction: %X{inst}"
-            
+
         | 0x13UL ->
             let imm = ((inst &&& 0xfff00000UL) |> int32 |> int64 >>> 20) |> uint64
             let shamt = (imm &&& 0x3fUL) |> uint32
@@ -90,6 +90,7 @@ type CPU(__code: array<uint8>) =
         | _ -> failwith $"Illegal instruction: %X{inst}"
 
         this.UpdatePC()
+
     member public this.DumpRegisters() =
         let RVABI =
             [| "zero"
