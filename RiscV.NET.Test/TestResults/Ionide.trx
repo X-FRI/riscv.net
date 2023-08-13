@@ -1,0 +1,493 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="fcd6448d-842d-4710-905e-60b89499486d" name="@localhost 2023-08-13 11:02:02" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2023-08-13T11:02:02.4715715+08:00" queuing="2023-08-13T11:02:02.4715715+08:00" start="2023-08-13T11:02:01.2271952+08:00" finish="2023-08-13T11:02:03.2067746+08:00" />
+  <TestSettings name="default" id="38de6cba-d712-4ed5-9e95-d2cc4cd035ea">
+    <Deployment runDeploymentRoot="_localhost_2023-08-13_11_02_02" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="57eec04a-08b6-4dd9-b848-513575e831eb" testId="9242582b-52d4-b637-15c4-af1aa94da852" testName="test_store_load1" computerName="localhost" duration="00:00:00.0515790" startTime="2023-08-13T11:02:02.9763563+08:00" endTime="2023-08-13T11:02:03.0279344+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="57eec04a-08b6-4dd9-b848-513575e831eb">
+      <Output>
+        <StdOut>Generate riscv binary for test_store_load1...</StdOut>
+        <StdErr>Failed to generate riscv object: 
+test_store_load1
+test_store_load1.s:2:27: error: unexpected token
+            addi s0, zero 256
+                          ^
+test_store_load1.s:3:25: error: unexpected token
+            addi sp, sp -16
+                        ^
+
+Failed to generate riscv binary: 
+test_store_load1
+llvm-objcopy: error: 'test_store_load1.obj': No such file or directory</StdErr>
+        <ErrorInfo>
+          <Message>System.IO.FileNotFoundException : Could not find file '/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/test_store_load1.bin'.</Message>
+          <StackTrace>   at Interop.ThrowExceptionForIoErrno(ErrorInfo errorInfo, String path, Boolean isDirError)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String path, OpenFlags flags, Int32 mode, Func`4 createOpenException)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize, UnixFileMode openPermissions, Int64&amp; fileLength, UnixFileMode&amp; filePermissions, Func`4 createOpenException)
+   at System.IO.File.OpenHandle(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.File.ReadAllBytes(String path)
+   at RiscV.Net.Test.Utils.rv_helper[a](String code, a testname, Int32 n_clock) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 102
+   at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 118
+   at RiscV.Net.Test.Program.ASMTests.test_store_load1() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 133
+   at System.RuntimeMethodHandle.InvokeMethod(Object target, Void** arguments, Signature sig, Boolean isConstructor)
+   at System.Reflection.MethodInvoker.Invoke(Object obj, IntPtr* args, BindingFlags invokeAttr)
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="f504a6c0-def0-4d1a-99e2-ec4b13ea44ba" testId="3b01c495-bd2c-4a80-4cfd-2b139e9a4447" testName="test_bgeu" computerName="localhost" duration="00:00:00.0636580" startTime="2023-08-13T11:02:02.1238404+08:00" endTime="2023-08-13T11:02:02.1874983+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f504a6c0-def0-4d1a-99e2-ec4b13ea44ba">
+      <Output>
+        <StdOut>Generate riscv binary for test_bgeu...</StdOut>
+        <ErrorInfo>
+          <StackTrace>   at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_bgeu() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 120
+
+1)    at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_bgeu() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 120
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="b0f4a6b9-627c-4e8e-bcb7-7c3e3a7a2ac1" testId="3b0f0095-0283-8ef4-6ccd-b5af9d135c3f" testName="test_bge" computerName="localhost" duration="00:00:00.0663420" startTime="2023-08-13T11:02:02.0574557+08:00" endTime="2023-08-13T11:02:02.1237974+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b0f4a6b9-627c-4e8e-bcb7-7c3e3a7a2ac1">
+      <Output>
+        <StdOut>Generate riscv binary for test_bge...</StdOut>
+        <ErrorInfo>
+          <StackTrace>   at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_bge() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 98
+
+1)    at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_bge() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 98
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="d26c271e-8412-4a40-9d6c-5cf23fe0c53c" testId="666b5219-79c3-bfb6-fc9e-4e2304b7d157" testName="test_auipc" computerName="localhost" duration="00:00:00.0812180" startTime="2023-08-13T11:02:01.8787624+08:00" endTime="2023-08-13T11:02:01.9599809+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d26c271e-8412-4a40-9d6c-5cf23fe0c53c">
+      <Output>
+        <StdOut>Generate riscv binary for test_auipc...</StdOut>
+        <ErrorInfo>
+          <StackTrace>   at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_auipc() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 41
+
+1)    at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_auipc() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 41
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="9046ac36-d935-4a42-a559-db490b528e53" testId="eefaf7f2-f443-806c-c3c8-ef1b72b3a835" testName="test_bne" computerName="localhost" duration="00:00:00.0736340" startTime="2023-08-13T11:02:02.3211585+08:00" endTime="2023-08-13T11:02:02.3947918+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9046ac36-d935-4a42-a559-db490b528e53">
+      <Output>
+        <StdOut>Generate riscv binary for test_bne...</StdOut>
+        <ErrorInfo>
+          <StackTrace>   at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_bne() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 76
+
+1)    at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_bne() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 76
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="15de44aa-6da2-4af1-ac82-3c2a009f80d1" testId="8cebbef3-a290-5443-5ae5-72d9495b0246" testName="test_sll" computerName="localhost" duration="00:00:00.0673570" startTime="2023-08-13T11:02:02.7703614+08:00" endTime="2023-08-13T11:02:02.8377176+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="15de44aa-6da2-4af1-ac82-3c2a009f80d1">
+      <Output>
+        <StdOut>Generate riscv binary for test_sll...</StdOut>
+        <ErrorInfo>
+          <StackTrace>   at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_sll() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 194
+
+1)    at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_sll() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 194
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="1981ae68-ee5a-41ec-8223-a075cfd2948a" testId="f4e4af6f-b4f9-c214-ca80-3ae527884026" testName="test_simple" computerName="localhost" duration="00:00:00.0931420" startTime="2023-08-13T11:02:02.6771807+08:00" endTime="2023-08-13T11:02:02.7703223+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1981ae68-ee5a-41ec-8223-a075cfd2948a">
+      <Output>
+        <StdOut>Generate riscv binary for test_simple...</StdOut>
+        <ErrorInfo>
+          <StackTrace>   at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_simple() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 27
+
+1)    at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_simple() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 27
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="e551c79d-f2ce-43ad-9cae-61bfc611b733" testId="ff2138d9-6caf-b9a0-b94b-b5eb13717289" testName="test_addi" computerName="localhost" duration="00:00:00.1126490" startTime="2023-08-13T11:02:01.6967596+08:00" endTime="2023-08-13T11:02:01.8093421+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e551c79d-f2ce-43ad-9cae-61bfc611b733">
+      <Output>
+        <StdOut>Generate riscv binary for test_addi...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="83d5b131-b0f5-4383-bbe4-935b7b80c6c9" testId="5bbca50b-d77a-d187-7a52-5e4a4be7749a" testName="test_lui" computerName="localhost" duration="00:00:00.0706760" startTime="2023-08-13T11:02:02.5366095+08:00" endTime="2023-08-13T11:02:02.6072843+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="83d5b131-b0f5-4383-bbe4-935b7b80c6c9">
+      <Output>
+        <StdOut>Generate riscv binary for test_lui...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="1643a1a1-3f0c-4710-b1e8-f4a3ea73fb8a" testId="ddde9bef-0f76-4936-b2f5-565e113414a0" testName="test_and" computerName="localhost" duration="00:00:00.0675570" startTime="2023-08-13T11:02:01.8110344+08:00" endTime="2023-08-13T11:02:01.8785919+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1643a1a1-3f0c-4710-b1e8-f4a3ea73fb8a">
+      <Output>
+        <StdOut>Generate riscv binary for test_and...</StdOut>
+        <ErrorInfo>
+          <StackTrace>   at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_and() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 180
+
+1)    at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_and() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 180
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="2fca82d0-3655-46c0-9394-8acf63410a6a" testId="80d5df4b-f073-d96f-5aad-b4169b8d4998" testName="test_blt" computerName="localhost" duration="00:00:00.0671310" startTime="2023-08-13T11:02:02.1875302+08:00" endTime="2023-08-13T11:02:02.2546607+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="2fca82d0-3655-46c0-9394-8acf63410a6a">
+      <Output>
+        <StdOut>Generate riscv binary for test_blt...</StdOut>
+        <ErrorInfo>
+          <StackTrace>   at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_blt() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 87
+
+1)    at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_blt() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 87
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="5d64e254-6d8c-41a6-81da-7ce1e685fe87" testId="db061d58-ac72-c57c-b21b-9a67feeea1ff" testName="test_bltu" computerName="localhost" duration="00:00:00.0664170" startTime="2023-08-13T11:02:02.2547022+08:00" endTime="2023-08-13T11:02:02.3211185+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5d64e254-6d8c-41a6-81da-7ce1e685fe87">
+      <Output>
+        <StdOut>Generate riscv binary for test_bltu...</StdOut>
+        <ErrorInfo>
+          <StackTrace>   at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_bltu() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 109
+
+1)    at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_bltu() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 109
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="c1a3404f-a585-4cec-afd4-e53b3b274dde" testId="06558ebc-da19-d7ab-b611-5c8eee282479" testName="test_xor" computerName="localhost" duration="00:00:00.0604960" startTime="2023-08-13T11:02:03.0926042+08:00" endTime="2023-08-13T11:02:03.1531012+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c1a3404f-a585-4cec-afd4-e53b3b274dde">
+      <Output>
+        <StdOut>Generate riscv binary for test_xor...</StdOut>
+        <ErrorInfo>
+          <StackTrace>   at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_xor() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 158
+
+1)    at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_xor() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 158
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="57a3915c-6f25-46d7-866e-971458448028" testId="c1ff19ff-89fb-48b5-61c1-5aade09287bb" testName="test_slt" computerName="localhost" duration="00:00:00.0693440" startTime="2023-08-13T11:02:02.8377531+08:00" endTime="2023-08-13T11:02:02.9070969+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="57a3915c-6f25-46d7-866e-971458448028">
+      <Output>
+        <StdOut>Generate riscv binary for test_slt...</StdOut>
+        <ErrorInfo>
+          <StackTrace>   at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_slt() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 146
+
+1)    at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_slt() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 146
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="32c9368f-dc9d-4c7f-8d9f-23b8840f1909" testId="78beb443-42f7-b65b-8f4f-8a6452e63761" testName="test_jalr" computerName="localhost" duration="00:00:00.0638420" startTime="2023-08-13T11:02:02.4727387+08:00" endTime="2023-08-13T11:02:02.5365805+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="32c9368f-dc9d-4c7f-8d9f-23b8840f1909">
+      <Output>
+        <StdOut>Generate riscv binary for test_jalr...</StdOut>
+        <ErrorInfo>
+          <StackTrace>   at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_jalr() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 60
+
+1)    at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_jalr() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 60
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="9aab17de-114b-4f78-9974-81b6aeec39ed" testId="4fb990bd-1fc7-83a0-03d5-b5e3e28fb8c7" testName="test_beq" computerName="localhost" duration="00:00:00.0973900" startTime="2023-08-13T11:02:01.9600271+08:00" endTime="2023-08-13T11:02:02.0574166+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9aab17de-114b-4f78-9974-81b6aeec39ed">
+      <Output>
+        <StdOut>Generate riscv binary for test_beq...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="311706d7-36f8-4fb5-bfea-fd7984ff8985" testId="fac9ab8b-eb5c-2e5a-324c-b760d9badd6c" testName="test_jal" computerName="localhost" duration="00:00:00.0778730" startTime="2023-08-13T11:02:02.3948329+08:00" endTime="2023-08-13T11:02:02.4727052+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="311706d7-36f8-4fb5-bfea-fd7984ff8985">
+      <Output>
+        <StdOut>Generate riscv binary for test_jal...</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="9dd54a67-f7d2-4117-8ed7-da7781c9da3d" testId="8c02cd12-05a9-0b09-8321-d1fa7e5cf9ba" testName="test_or" computerName="localhost" duration="00:00:00.0695930" startTime="2023-08-13T11:02:02.6075487+08:00" endTime="2023-08-13T11:02:02.6771421+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9dd54a67-f7d2-4117-8ed7-da7781c9da3d">
+      <Output>
+        <StdOut>Generate riscv binary for test_or...</StdOut>
+        <ErrorInfo>
+          <StackTrace>   at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_or() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 169
+
+1)    at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_or() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 169
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="792d510f-660d-45ed-bc62-b7120539e5d2" testId="b4fba01d-ecdf-72fd-6ac1-868027c0d190" testName="test_word_op" computerName="localhost" duration="00:00:00.0645760" startTime="2023-08-13T11:02:03.0279965+08:00" endTime="2023-08-13T11:02:03.0925722+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="792d510f-660d-45ed-bc62-b7120539e5d2">
+      <Output>
+        <StdOut>Generate riscv binary for test_word_op...</StdOut>
+        <ErrorInfo>
+          <StackTrace>   at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_word_op() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 226
+
+1)    at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_word_op() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 226
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="83cd3d1f-d149-4adf-b803-d52272a45f42" testId="913fed45-2437-04dc-fe1b-187a1d8438d5" testName="test_sra_srl" computerName="localhost" duration="00:00:00.0691800" startTime="2023-08-13T11:02:02.9071410+08:00" endTime="2023-08-13T11:02:02.9763201+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="83cd3d1f-d149-4adf-b803-d52272a45f42">
+      <Output>
+        <StdOut>Generate riscv binary for test_sra_srl...</StdOut>
+        <ErrorInfo>
+          <StackTrace>   at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_sra_srl() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 211
+
+1)    at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 123
+   at RiscV.Net.Test.Program.ASMTests.test_sra_srl() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 211
+
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="test_bltu" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.test/bin/debug/net7.0/riscv.net.test.dll" id="db061d58-ac72-c57c-b21b-9a67feeea1ff">
+      <Execution id="5d64e254-6d8c-41a6-81da-7ce1e685fe87" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/RiscV.NET.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="RiscV.Net.Test.Program+ASMTests" name="test_bltu" />
+    </UnitTest>
+    <UnitTest name="test_bne" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.test/bin/debug/net7.0/riscv.net.test.dll" id="eefaf7f2-f443-806c-c3c8-ef1b72b3a835">
+      <Execution id="9046ac36-d935-4a42-a559-db490b528e53" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/RiscV.NET.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="RiscV.Net.Test.Program+ASMTests" name="test_bne" />
+    </UnitTest>
+    <UnitTest name="test_jalr" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.test/bin/debug/net7.0/riscv.net.test.dll" id="78beb443-42f7-b65b-8f4f-8a6452e63761">
+      <Execution id="32c9368f-dc9d-4c7f-8d9f-23b8840f1909" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/RiscV.NET.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="RiscV.Net.Test.Program+ASMTests" name="test_jalr" />
+    </UnitTest>
+    <UnitTest name="test_store_load1" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.test/bin/debug/net7.0/riscv.net.test.dll" id="9242582b-52d4-b637-15c4-af1aa94da852">
+      <Execution id="57eec04a-08b6-4dd9-b848-513575e831eb" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/RiscV.NET.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="RiscV.Net.Test.Program+ASMTests" name="test_store_load1" />
+    </UnitTest>
+    <UnitTest name="test_word_op" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.test/bin/debug/net7.0/riscv.net.test.dll" id="b4fba01d-ecdf-72fd-6ac1-868027c0d190">
+      <Execution id="792d510f-660d-45ed-bc62-b7120539e5d2" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/RiscV.NET.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="RiscV.Net.Test.Program+ASMTests" name="test_word_op" />
+    </UnitTest>
+    <UnitTest name="test_auipc" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.test/bin/debug/net7.0/riscv.net.test.dll" id="666b5219-79c3-bfb6-fc9e-4e2304b7d157">
+      <Execution id="d26c271e-8412-4a40-9d6c-5cf23fe0c53c" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/RiscV.NET.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="RiscV.Net.Test.Program+ASMTests" name="test_auipc" />
+    </UnitTest>
+    <UnitTest name="test_and" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.test/bin/debug/net7.0/riscv.net.test.dll" id="ddde9bef-0f76-4936-b2f5-565e113414a0">
+      <Execution id="1643a1a1-3f0c-4710-b1e8-f4a3ea73fb8a" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/RiscV.NET.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="RiscV.Net.Test.Program+ASMTests" name="test_and" />
+    </UnitTest>
+    <UnitTest name="test_xor" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.test/bin/debug/net7.0/riscv.net.test.dll" id="06558ebc-da19-d7ab-b611-5c8eee282479">
+      <Execution id="c1a3404f-a585-4cec-afd4-e53b3b274dde" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/RiscV.NET.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="RiscV.Net.Test.Program+ASMTests" name="test_xor" />
+    </UnitTest>
+    <UnitTest name="test_simple" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.test/bin/debug/net7.0/riscv.net.test.dll" id="f4e4af6f-b4f9-c214-ca80-3ae527884026">
+      <Execution id="1981ae68-ee5a-41ec-8223-a075cfd2948a" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/RiscV.NET.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="RiscV.Net.Test.Program+ASMTests" name="test_simple" />
+    </UnitTest>
+    <UnitTest name="test_or" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.test/bin/debug/net7.0/riscv.net.test.dll" id="8c02cd12-05a9-0b09-8321-d1fa7e5cf9ba">
+      <Execution id="9dd54a67-f7d2-4117-8ed7-da7781c9da3d" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/RiscV.NET.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="RiscV.Net.Test.Program+ASMTests" name="test_or" />
+    </UnitTest>
+    <UnitTest name="test_bge" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.test/bin/debug/net7.0/riscv.net.test.dll" id="3b0f0095-0283-8ef4-6ccd-b5af9d135c3f">
+      <Execution id="b0f4a6b9-627c-4e8e-bcb7-7c3e3a7a2ac1" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/RiscV.NET.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="RiscV.Net.Test.Program+ASMTests" name="test_bge" />
+    </UnitTest>
+    <UnitTest name="test_bgeu" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.test/bin/debug/net7.0/riscv.net.test.dll" id="3b01c495-bd2c-4a80-4cfd-2b139e9a4447">
+      <Execution id="f504a6c0-def0-4d1a-99e2-ec4b13ea44ba" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/RiscV.NET.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="RiscV.Net.Test.Program+ASMTests" name="test_bgeu" />
+    </UnitTest>
+    <UnitTest name="test_addi" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.test/bin/debug/net7.0/riscv.net.test.dll" id="ff2138d9-6caf-b9a0-b94b-b5eb13717289">
+      <Execution id="e551c79d-f2ce-43ad-9cae-61bfc611b733" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/RiscV.NET.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="RiscV.Net.Test.Program+ASMTests" name="test_addi" />
+    </UnitTest>
+    <UnitTest name="test_blt" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.test/bin/debug/net7.0/riscv.net.test.dll" id="80d5df4b-f073-d96f-5aad-b4169b8d4998">
+      <Execution id="2fca82d0-3655-46c0-9394-8acf63410a6a" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/RiscV.NET.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="RiscV.Net.Test.Program+ASMTests" name="test_blt" />
+    </UnitTest>
+    <UnitTest name="test_jal" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.test/bin/debug/net7.0/riscv.net.test.dll" id="fac9ab8b-eb5c-2e5a-324c-b760d9badd6c">
+      <Execution id="311706d7-36f8-4fb5-bfea-fd7984ff8985" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/RiscV.NET.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="RiscV.Net.Test.Program+ASMTests" name="test_jal" />
+    </UnitTest>
+    <UnitTest name="test_beq" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.test/bin/debug/net7.0/riscv.net.test.dll" id="4fb990bd-1fc7-83a0-03d5-b5e3e28fb8c7">
+      <Execution id="9aab17de-114b-4f78-9974-81b6aeec39ed" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/RiscV.NET.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="RiscV.Net.Test.Program+ASMTests" name="test_beq" />
+    </UnitTest>
+    <UnitTest name="test_lui" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.test/bin/debug/net7.0/riscv.net.test.dll" id="5bbca50b-d77a-d187-7a52-5e4a4be7749a">
+      <Execution id="83d5b131-b0f5-4383-bbe4-935b7b80c6c9" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/RiscV.NET.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="RiscV.Net.Test.Program+ASMTests" name="test_lui" />
+    </UnitTest>
+    <UnitTest name="test_sll" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.test/bin/debug/net7.0/riscv.net.test.dll" id="8cebbef3-a290-5443-5ae5-72d9495b0246">
+      <Execution id="15de44aa-6da2-4af1-ac82-3c2a009f80d1" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/RiscV.NET.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="RiscV.Net.Test.Program+ASMTests" name="test_sll" />
+    </UnitTest>
+    <UnitTest name="test_slt" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.test/bin/debug/net7.0/riscv.net.test.dll" id="c1ff19ff-89fb-48b5-61c1-5aade09287bb">
+      <Execution id="57a3915c-6f25-46d7-866e-971458448028" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/RiscV.NET.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="RiscV.Net.Test.Program+ASMTests" name="test_slt" />
+    </UnitTest>
+    <UnitTest name="test_sra_srl" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.test/bin/debug/net7.0/riscv.net.test.dll" id="913fed45-2437-04dc-fe1b-187a1d8438d5">
+      <Execution id="83cd3d1f-d149-4adf-b803-d52272a45f42" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/RiscV.NET.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="RiscV.Net.Test.Program+ASMTests" name="test_sra_srl" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="9242582b-52d4-b637-15c4-af1aa94da852" executionId="57eec04a-08b6-4dd9-b848-513575e831eb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3b01c495-bd2c-4a80-4cfd-2b139e9a4447" executionId="f504a6c0-def0-4d1a-99e2-ec4b13ea44ba" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3b0f0095-0283-8ef4-6ccd-b5af9d135c3f" executionId="b0f4a6b9-627c-4e8e-bcb7-7c3e3a7a2ac1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="666b5219-79c3-bfb6-fc9e-4e2304b7d157" executionId="d26c271e-8412-4a40-9d6c-5cf23fe0c53c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="eefaf7f2-f443-806c-c3c8-ef1b72b3a835" executionId="9046ac36-d935-4a42-a559-db490b528e53" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8cebbef3-a290-5443-5ae5-72d9495b0246" executionId="15de44aa-6da2-4af1-ac82-3c2a009f80d1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f4e4af6f-b4f9-c214-ca80-3ae527884026" executionId="1981ae68-ee5a-41ec-8223-a075cfd2948a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ff2138d9-6caf-b9a0-b94b-b5eb13717289" executionId="e551c79d-f2ce-43ad-9cae-61bfc611b733" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5bbca50b-d77a-d187-7a52-5e4a4be7749a" executionId="83d5b131-b0f5-4383-bbe4-935b7b80c6c9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ddde9bef-0f76-4936-b2f5-565e113414a0" executionId="1643a1a1-3f0c-4710-b1e8-f4a3ea73fb8a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="80d5df4b-f073-d96f-5aad-b4169b8d4998" executionId="2fca82d0-3655-46c0-9394-8acf63410a6a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="db061d58-ac72-c57c-b21b-9a67feeea1ff" executionId="5d64e254-6d8c-41a6-81da-7ce1e685fe87" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="06558ebc-da19-d7ab-b611-5c8eee282479" executionId="c1a3404f-a585-4cec-afd4-e53b3b274dde" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c1ff19ff-89fb-48b5-61c1-5aade09287bb" executionId="57a3915c-6f25-46d7-866e-971458448028" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="78beb443-42f7-b65b-8f4f-8a6452e63761" executionId="32c9368f-dc9d-4c7f-8d9f-23b8840f1909" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4fb990bd-1fc7-83a0-03d5-b5e3e28fb8c7" executionId="9aab17de-114b-4f78-9974-81b6aeec39ed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fac9ab8b-eb5c-2e5a-324c-b760d9badd6c" executionId="311706d7-36f8-4fb5-bfea-fd7984ff8985" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8c02cd12-05a9-0b09-8321-d1fa7e5cf9ba" executionId="9dd54a67-f7d2-4117-8ed7-da7781c9da3d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b4fba01d-ecdf-72fd-6ac1-868027c0d190" executionId="792d510f-660d-45ed-bc62-b7120539e5d2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="913fed45-2437-04dc-fe1b-187a1d8438d5" executionId="83cd3d1f-d149-4adf-b803-d52272a45f42" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Failed">
+    <Counters total="20" executed="20" passed="4" failed="16" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 4.4.0.0: Test execution started
+Running selected tests in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/RiscV.NET.Test.dll
+   NUnit3TestExecutor discovered 20 of 20 NUnit test cases using Current Discovery mode, Non-Explicit run
+NUnit Adapter 4.4.0.0: Test execution complete
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:01.8174712+08:00">
+        <Text>Generate riscv binary for test_addi...
+</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:01.8873992+08:00">
+        <Text>Generate riscv binary for test_and...
+</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:01.9612298+08:00">
+        <Text>Generate riscv binary for test_auipc...
+</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:02.0582818+08:00">
+        <Text>Generate riscv binary for test_beq...
+</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:02.1248333+08:00">
+        <Text>Generate riscv binary for test_bge...
+</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:02.1884738+08:00">
+        <Text>Generate riscv binary for test_bgeu...
+</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:02.2555024+08:00">
+        <Text>Generate riscv binary for test_blt...
+</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:02.3221323+08:00">
+        <Text>Generate riscv binary for test_bltu...
+</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:02.3958349+08:00">
+        <Text>Generate riscv binary for test_bne...
+</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:02.4787580+08:00">
+        <Text>Generate riscv binary for test_jal...
+</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:02.5373539+08:00">
+        <Text>Generate riscv binary for test_jalr...
+</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:02.6083432+08:00">
+        <Text>Generate riscv binary for test_lui...
+</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:02.6779468+08:00">
+        <Text>Generate riscv binary for test_or...
+</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:02.7710767+08:00">
+        <Text>Generate riscv binary for test_simple...
+</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:02.8386779+08:00">
+        <Text>Generate riscv binary for test_sll...
+</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:02.9082465+08:00">
+        <Text>Generate riscv binary for test_slt...
+</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:02.9770975+08:00">
+        <Text>Generate riscv binary for test_sra_srl...
+</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:03.0129026+08:00">
+        <Text>Failed to generate riscv object: </Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:03.0129564+08:00">
+        <Text>test_store_load1</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:03.0129769+08:00">
+        <Text>test_store_load1.s:2:27: error: unexpected token
+            addi s0, zero 256
+                          ^
+test_store_load1.s:3:25: error: unexpected token
+            addi sp, sp -16
+                        ^</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:03.0262319+08:00">
+        <Text>Failed to generate riscv binary: </Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:03.0262780+08:00">
+        <Text>test_store_load1</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:03.0262868+08:00">
+        <Text>llvm-objcopy: error: 'test_store_load1.obj': No such file or directory</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:03.0293195+08:00">
+        <Text>Generate riscv binary for test_store_load1...
+</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:03.0932194+08:00">
+        <Text>Generate riscv binary for test_word_op...
+</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T11:02:03.1538491+08:00">
+        <Text>Generate riscv binary for test_xor...
+</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>
