@@ -46,12 +46,30 @@ As you can see, this is not a mature solution, and it is almost impossible to be
 - __RiscV.NET.Native__: The native RiscV.NET.Core interface can be compiled into a local executable file through .NET Native AOT to run, or simply run on .NET CLR.
 
 ## Build and Run
-
 > ...
 
 ## Usage
-
 > ...
+
+## Progress
+- [x] Adder
+- [x] Memory and Bus
+- [ ] Control Status Register
+- [ ] Privilege Mode
+- [ ] Exception
+- [ ] PLIC & CLINT
+- [ ] UART
+- [ ] Interrupt
+- [ ] Virtio
+- [ ] Page Table
+
+## Reference
+- [RISC-V Assembler Reference](https://mark.theis.site/riscv/asm)
+- [RISC-V ISA: A rapid way to learn the RISC-V ISA](https://risc-v.guru/instructions/)
+- [The RISC-V Instruction Set Manual Volume I: Unprivileged ISA](https://github.com/riscv/riscv-isa-manual/releases/download/Ratified-IMAFDQC/riscv-spec-20191213.pdf)
+- [The RISC-V Instruction Set Manual Volume II: Privileged Architecture](https://github.com/riscv/riscv-isa-manual/releases/download/Priv-v1.12/riscv-privileged-20211203.pdf)
+- [rvemu: RISC-V emulator for CLI and Web written in Rust with WebAssembly. It supports xv6 and Linux (ongoing)](https://github.com/d0iasm/rvemu)
+- [Writing a RISC-V Emulator in Rust](https://book.rvemu.app/)
 
 ## License
 The MIT License (MIT)
