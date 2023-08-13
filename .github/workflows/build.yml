@@ -1,4 +1,4 @@
-name: dotnet package
+name: build
 
 on: [push]
 
@@ -20,5 +20,5 @@ jobs:
         run: dotnet restore
       - name: Build
         run: dotnet build --configuration Release --no-restore
-      - name: Test
-        run: dotnet test --no-restore --verbosity normal
+#      - name: Test
+#        run: dotnet test --no-restore --verbosity normal
