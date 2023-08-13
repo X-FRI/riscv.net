@@ -73,13 +73,11 @@ let CC = "clang"
 let LINK = "llvm-objcopy"
 
 let generate_riscv_binary src =
-    printfn $"Generate riscv binary for {src}..."
-
     async {
 
         let! obj =
             Exec
-                $"{CC} -Wl,-Ttext=0x0 -nostdlib --target=riscv64 -march=rv64g -mno-relax -o {src}.obj {src}.s"
+                $"{CC} -Wl,-Ttext=0x0 -nostdlib --target=riscv64 -march=rv64g -mabi=lp64 -mno-relax -o {src}.obj {src}.s"
 
         obj
         <|> (Failure,
@@ -110,27 +108,25 @@ let rv_helper (code : string) testname n_clock =
     file.Close()
     generate_riscv_binary (testname)
 
-    let cpu = CPU.init (File.ReadAllBytes($"{testname}.bin") |> Array.map uint8)
+    printf $"{testname}..."
+    let rec test cpu n_clock =
+        if n_clock = 0 then
+            Ok(cpu)
+        else
+            CPU.fetch cpu
+            |> Result.bind (CPU.execute cpu)
+            |> Result.bind (fun () -> test cpu (n_clock - 1))
 
-    try
-        for i = 0 to n_clock do
-            match CPU.fetch cpu with
-            | Ok inst ->
-                match CPU.execute cpu inst with
-                | Ok() -> break_with_result (Ok(cpu))
-                | Error err -> break_with_result (Error err)
-            | Error err -> break_with_result (Error err)
-
-        Ok(cpu)
-    with Break result ->
-        result
+    test (CPU.init (File.ReadAllBytes($"{testname}.bin") |> Array.map uint8)) n_clock
 
 let riscv_test code testname n_cloc assert_fn =
     match rv_helper code testname n_cloc with
     | Ok cpu ->
         if assert_fn cpu then
+            printf "ok"
             Assert.Pass()
         else
+            printf "fail"
             CPU.dump_regs cpu
             Assert.Fail()
     | Error(err) -> Assert.Fail $"Name: {testname}\nError: ${Error.to_string err}"

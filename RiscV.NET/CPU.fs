@@ -366,10 +366,10 @@ let execute cpu inst =
         | _ -> Error(Error.IllegalInstruction inst)
     // jalr
     | 0x67UL ->
-        let t = cpu.pc + 4UL
-        let imm = ((((inst &&& 0xfff00000UL) |> int32) |> int64) >>> 20) |> uint64
+        cpu.regs[rd] <- (cpu.pc + 4UL)
+        let imm = (((inst &&& 0xfff00000UL) |> int32 |> int64) >>> 20) |> uint64
         let new_pc = (cpu.regs[rs1] + imm) &&& ((~~~ 1) |> uint64)
-        cpu.regs[rd] <- t
+
         Ok(Custom(new_pc))
 
     // jal
