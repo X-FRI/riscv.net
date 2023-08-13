@@ -156,7 +156,7 @@ let execute cpu inst =
 
     // auipc
     | 0x17UL ->
-        let imm = (inst &&& 0xfffff000UL) |> int32 |> int64 |> uint64
+        let imm = inst &&& 0xfffff000UL
         Ok(Auto(cpu.regs[rd] <- (cpu.pc + imm)))
 
     | 0x1bUL ->
@@ -317,7 +317,9 @@ let execute cpu inst =
 
 let dump_regs cpu =
     printfn $"o- Registers"
-    cpu.regs[0] <- 0UL
+    printfn $"o- pc = {cpu.pc}"
+    
+    cpu.regs[0] <- 0UL    
 
     for i in 0..4..31 do
         printfn

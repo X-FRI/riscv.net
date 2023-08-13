@@ -29,7 +29,6 @@ let test_lui () =
     let code = "lui a0, 42"
 
     Utils.riscv_test code "test_lui" 1 (fun cpu ->
-        // LUI puts the U-type immediate data into the upper 20 bits of the destination register rd and fills the lower 12 bits with 0.
         cpu.regs[10] = (42UL <<< 12))
 
 [<Test>]
@@ -37,8 +36,7 @@ let test_auipc () =
     let code = "auipc a0, 42"
 
     Utils.riscv_test code "test_auipc" 1 (fun cpu ->
-        // AUIPC fills the lower 12 bits with 0 and the upper 20 bits are U-type immediate data to form a 32-bit offset then add it to the PC and finally save the result in the register rd.
-        cpu.regs[10] = (Dram.SIZE + (42UL <<< 12)))
+        cpu.regs[10] = (Dram.BASE + (42UL <<< 12)))
 
 [<Test>]
 let test_jal () =
