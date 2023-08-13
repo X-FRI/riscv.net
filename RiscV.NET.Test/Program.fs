@@ -4,12 +4,12 @@ open NUnit.Framework
 open RiscV.Net
 
 [<Test>]
-let test_addi () =
+let ``addi`` () =
     let code = "addi x31, x0, 42"
     Utils.riscv_test code "test_addi" 1 (fun cpu -> cpu.regs[31] = 42UL)
 
 [<Test>]
-let test_simple () =
+let ``simple`` () =
     let code =
         "
             addi sp, sp,-16
@@ -25,27 +25,27 @@ let test_simple () =
     Utils.riscv_test code "test_simple" 20 (fun cpu -> cpu.regs[10] = 42UL)
 
 [<Test>]
-let test_lui () =
+let ``lui`` () =
     let code = "lui a0, 42"
 
     Utils.riscv_test code "test_lui" 1 (fun cpu -> cpu.regs[10] = (42UL <<< 12))
 
 [<Test>]
-let test_auipc () =
+let ``auipc`` () =
     let code = "auipc a0, 42"
 
     Utils.riscv_test code "test_auipc" 1 (fun cpu ->
         cpu.regs[10] = (Dram.BASE + (42UL <<< 12)))
 
 [<Test>]
-let test_jal () =
+let ``jal`` () =
     let code = "jal a0, 42"
 
     Utils.riscv_test code "test_jal" 1 (fun cpu ->
         (cpu.regs[10] = (Dram.BASE + 4UL)) && (cpu.pc = (Dram.BASE + 42UL)))
 
 [<Test>]
-let test_jalr () =
+let ``jalr`` () =
     let code =
         "
             addi a1, zero, 42
@@ -56,13 +56,13 @@ let test_jalr () =
         (cpu.regs[10] = Dram.BASE + 8UL) && (cpu.pc = 34UL))
 
 [<Test>]
-let test_beq () =
-    let code = "beq  x0, x0, 42"
+let ``beq`` () =
+    let code = "beq x0, x0, 42"
 
     Utils.riscv_test code "test_beq" 3 (fun cpu -> cpu.pc = (Dram.BASE + 42UL))
 
 [<Test>]
-let test_bne () =
+let ``bne`` () =
     let code =
         "
             addi x1, x0, 10
@@ -72,7 +72,7 @@ let test_bne () =
     Utils.riscv_test code "test_bne" 5 (fun cpu -> cpu.pc = (Dram.BASE + 42UL + 4UL))
 
 [<Test>]
-let test_blt () =
+let ``blt`` () =
     let code =
         "
             addi x1, x0, 10
@@ -83,7 +83,7 @@ let test_blt () =
     Utils.riscv_test code "test_blt" 10 (fun cpu -> cpu.pc = (Dram.BASE + 42UL + 8UL))
 
 [<Test>]
-let test_bge () =
+let ``bge`` () =
     let code =
         "
             addi x1, x0, 10
@@ -94,7 +94,7 @@ let test_bge () =
     Utils.riscv_test code "test_bge" 10 (fun cpu -> cpu.pc = (Dram.BASE + 42UL + 8UL))
 
 [<Test>]
-let test_bltu () =
+let ``bltu`` () =
     let code =
         "
             addi x1, x0, 10
@@ -105,7 +105,7 @@ let test_bltu () =
     Utils.riscv_test code "test_bltu" 10 (fun cpu -> cpu.pc = (Dram.BASE + 42UL + 8UL))
 
 [<Test>]
-let test_bgeu () =
+let ``bgeu`` () =
     let code =
         "
             addi x1, x0, 10
@@ -116,11 +116,11 @@ let test_bgeu () =
     Utils.riscv_test code "test_bgeu" 10 (fun cpu -> cpu.pc = (Dram.BASE + 42UL + 8UL))
 
 [<Test>]
-let test_store_load1 () =
+let ``store load 1`` () =
     let code =
         "
-            addi s0, zero 256
-            addi sp, sp -16
+            addi s0, zero, 256
+            addi sp, sp, -16
             sd   s0, 8(sp)
             lb   t1, 8(sp)
             lh   t2, 8(sp)
@@ -130,7 +130,7 @@ let test_store_load1 () =
         (cpu.regs[6] = 0UL) && (cpu.regs[7] = 256UL))
 
 [<Test>]
-let test_slt () =
+let ``slt`` () =
     let code =
         "
             addi t0, zero, 14
@@ -144,7 +144,7 @@ let test_slt () =
         (cpu.regs[7] = 1UL) && (cpu.regs[28] = 1UL) && (cpu.regs[29] = 1UL))
 
 [<Test>]
-let test_xor () =
+let ``xor`` () =
     let code =
         "
             addi a0, zero, 0b10
@@ -156,7 +156,7 @@ let test_xor () =
         (cpu.regs[11] = 3UL) && (cpu.regs[12] = 0UL))
 
 [<Test>]
-let test_or () =
+let ``or`` () =
     let code =
         "
             addi a0, zero, 0b10
@@ -168,7 +168,7 @@ let test_or () =
         (cpu.regs[11] = 0b11UL) && (cpu.regs[12] = 0b10UL))
 
 [<Test>]
-let test_and () =
+let ``and`` () =
     let code =
         "
             addi a0, zero, 0b10 
@@ -180,7 +180,7 @@ let test_and () =
         (cpu.regs[11] = 0b10UL) && (cpu.regs[12] = 0b10UL))
 
 [<Test>]
-let test_sll () =
+let ``sll`` () =
     let code =
         "
             addi a0, zero, 1
@@ -197,7 +197,7 @@ let test_sll () =
         && (cpu.regs[14] = 1UL))
 
 [<Test>]
-let test_sra_srl () =
+let ``sra srl`` () =
     let code =
         "
             addi a0, zero, -8
@@ -215,7 +215,7 @@ let test_sra_srl () =
         && (cpu.regs[15] = (-8 |> int64 |> uint64 >>> 1)))
 
 [<Test>]
-let test_word_op () =
+let ``word op`` () =
     let code =
         "
             addi a0, zero, 42 

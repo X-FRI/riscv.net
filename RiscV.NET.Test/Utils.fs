@@ -109,13 +109,18 @@ let rv_helper (code : string) testname n_clock =
     generate_riscv_binary (testname)
 
     printf $"{testname}..."
+
     let rec test cpu n_clock =
         if n_clock = 0 then
             Ok(cpu)
         else
-            CPU.fetch cpu
-            |> Result.bind (CPU.execute cpu)
-            |> Result.bind (fun () -> test cpu (n_clock - 1))
+            match CPU.fetch cpu with
+            | Error _ -> Ok(cpu)
+            | Ok inst ->
+                if inst = 0UL then
+                    Ok(cpu)
+                else
+                    CPU.execute cpu inst |> Result.bind (fun () -> test cpu (n_clock - 1))
 
     test (CPU.init (File.ReadAllBytes($"{testname}.bin") |> Array.map uint8)) n_clock
 
@@ -126,7 +131,7 @@ let riscv_test code testname n_cloc assert_fn =
             printf "ok"
             Assert.Pass()
         else
-            printf "fail"
+            printfn "fail"
             CPU.dump_regs cpu
             Assert.Fail()
-    | Error(err) -> Assert.Fail $"Name: {testname}\nError: ${Error.to_string err}"
+    | Error(err) -> Assert.Fail $"Name: {testname}\nError: {Error.to_string err}"

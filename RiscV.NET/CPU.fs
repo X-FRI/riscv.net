@@ -332,37 +332,37 @@ let execute cpu inst =
             if cpu.regs[rs1] = cpu.regs[rs2] then
                 Ok(Custom(cpu.pc + imm))
             else
-                failwith "Unreachable!!!!!!!"
+                Ok(Auto())
         // bne
         | 0x1UL ->
             if cpu.regs[rs1] <> cpu.regs[rs2] then
                 Ok(Custom(cpu.pc + imm))
             else
-                failwith "Unreachable!!!!!!!"
+                Ok(Auto())
         // blt
         | 0x4UL ->
             if (cpu.regs[rs1] |> int64) < (cpu.regs[rs2] |> int64) then
                 Ok(Custom(cpu.pc + imm))
             else
-                failwith "Unreachable!!!!!!!"
+                Ok(Auto())
         // bge
         | 0x5UL ->
             if (cpu.regs[rs1] |> int64) >= (cpu.regs[rs2] |> int64) then
                 Ok(Custom(cpu.pc + imm))
             else
-                failwith "Unreachable!!!!!!!"
+                Ok(Auto())
         // bltu
         | 0x6UL ->
             if cpu.regs[rs1] < cpu.regs[rs2] then
                 Ok(Custom(cpu.pc + imm))
             else
-                failwith "Unreachable!!!!!!!"
+                Ok(Auto())
         // bgeu
         | 0x7UL ->
             if cpu.regs[rs1] >= cpu.regs[rs2] then
                 Ok(Custom(cpu.pc + imm))
             else
-                failwith "Unreachable!!!!!!!"
+                Ok(Auto())
         | _ -> Error(Error.IllegalInstruction inst)
     // jalr
     | 0x67UL ->
