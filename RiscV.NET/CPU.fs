@@ -72,6 +72,8 @@ let execute cpu inst =
 
     cpu.regs[0] <- 0UL
 
+    printfn $"opcode = %X{opcode}"
+
     match opcode with
     | 0x03UL ->
         let imm = ((inst |> int32 |> int64) >>> 20) |> uint64
@@ -234,7 +236,7 @@ let execute cpu inst =
         // sub
         | (0x0UL, 0x20UL) -> Ok(Auto(cpu.regs[rd] <- (cpu.regs[rs1] + cpu.regs[rs2])))
         // sll
-        | (0x1UL, 0x00UL) -> Ok(Auto(cpu.regs[rd] <- (cpu.regs[rs1] + (shamt |> uint64))))
+        | (0x1UL, 0x00UL) -> Ok(Auto(cpu.regs[rd] <- (cpu.regs[rs1] <<< (shamt |> int32))))
         // slt
         | (0x2UL, 0x00UL) ->
             Ok(
