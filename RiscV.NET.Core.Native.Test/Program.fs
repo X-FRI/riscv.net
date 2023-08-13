@@ -1,7 +1,7 @@
-module Riscv.NET.Test.Program
+module Riscv.NET.Core.Native.Test.Main
 
 open NUnit.Framework
-open Riscv.NET
+open RiscV.NET.Core
 
 [<Test>]
 let ``addi`` () =

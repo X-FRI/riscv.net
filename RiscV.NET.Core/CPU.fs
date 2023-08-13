@@ -1,45 +1,7 @@
-module Riscv.NET.CPU
-
-module Regs =
-    type t = array<uint64>
-    let init () = Array.zeroCreate<uint64> (32)
-
-    let RVABI =
-        [| "zero"
-           "ra"
-           "sp"
-           "gp"
-           "tp"
-           "t0"
-           "t1"
-           "t2"
-           "s0"
-           "s1"
-           "a0"
-           "a1"
-           "a2"
-           "a3"
-           "a4"
-           "a5"
-           "a6"
-           "a7"
-           "s2"
-           "s3"
-           "s4"
-           "s5"
-           "s6"
-           "s7"
-           "s8"
-           "s9"
-           "s10"
-           "s11"
-           "t3"
-           "t4"
-           "t5"
-           "t6" |]
+module RiscV.NET.Core.CPU
 
 type t =
-    { regs : Regs.t
+    { regs : Register.t
       bus : Bus.t
       mutable pc : uint64 }
 
@@ -48,7 +10,7 @@ type pc_update_state =
     | Custom of uint64
 
 let init code =
-    let regs = Regs.init ()
+    let regs = Register.init ()
     regs[2] <- Dram.END
 
     { regs = regs
@@ -392,17 +354,6 @@ let execute cpu inst =
     | _ -> Error(Error.IllegalInstruction inst)
 
     |> Result.map (fun state -> update_pc cpu state)
-
-
-let dump_regs cpu =
-    printfn $"o- Registers"
-    printfn $"o- pc = %X{cpu.pc}"
-
-    cpu.regs[0] <- 0UL
-
-    for i in 0..4..31 do
-        printfn
-            $"x{i}({Regs.RVABI[i]}) = 0x%0x{cpu.regs[i]}\tx{i + 1}({Regs.RVABI[i + 1]}) = 0x%0x{cpu.regs[i + 1]}\tx{i + 2}({Regs.RVABI[i + 2]}) = 0x%0x{cpu.regs[i + 2]}\tx{i + 3}({Regs.RVABI[i + 3]}) = 0x%0x{cpu.regs[i + 3]}"
 
 let rec run cpu =
     match fetch cpu |> Result.bind (fun inst -> execute cpu inst) with

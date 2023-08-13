@@ -1,6 +1,7 @@
-﻿module Riscv.NET.Program
+﻿module RiscV.NET.Native.Main
 
 open System.IO
+open RiscV.NET.Core
 
 [<EntryPoint>]
 let main args =

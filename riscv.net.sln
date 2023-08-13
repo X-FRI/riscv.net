@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "RiscV.NET", "RiscV.NET\RiscV.NET.fsproj", "{739A36C5-1A11-41EB-8EE0-0F50DCA4300D}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "RiscV.NET.Core", "RiscV.NET.Core\RiscV.NET.Core.fsproj", "{BA59BB36-FE5F-4E53-94B6-548FEACD694E}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "RiscV.NET.Test", "RiscV.NET.Test\RiscV.NET.Test.fsproj", "{7CAA657C-9969-49DA-AE09-E1AE97886261}"
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "RiscV.NET.Core.Native.Test", "RiscV.NET.Core.Native.Test\RiscV.NET.Core.Native.Test.fsproj", "{05C1E48F-D27B-4972-A7A2-9A1D2E0EC743}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "RiscV.NET.Native", "RiscV.NET.Native\RiscV.NET.Native.fsproj", "{FCC85987-FF46-41AF-A03F-4269FDCB0FDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -16,13 +18,17 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{739A36C5-1A11-41EB-8EE0-0F50DCA4300D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{739A36C5-1A11-41EB-8EE0-0F50DCA4300D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{739A36C5-1A11-41EB-8EE0-0F50DCA4300D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{739A36C5-1A11-41EB-8EE0-0F50DCA4300D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7CAA657C-9969-49DA-AE09-E1AE97886261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7CAA657C-9969-49DA-AE09-E1AE97886261}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7CAA657C-9969-49DA-AE09-E1AE97886261}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7CAA657C-9969-49DA-AE09-E1AE97886261}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA59BB36-FE5F-4E53-94B6-548FEACD694E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA59BB36-FE5F-4E53-94B6-548FEACD694E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA59BB36-FE5F-4E53-94B6-548FEACD694E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA59BB36-FE5F-4E53-94B6-548FEACD694E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05C1E48F-D27B-4972-A7A2-9A1D2E0EC743}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05C1E48F-D27B-4972-A7A2-9A1D2E0EC743}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05C1E48F-D27B-4972-A7A2-9A1D2E0EC743}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05C1E48F-D27B-4972-A7A2-9A1D2E0EC743}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCC85987-FF46-41AF-A03F-4269FDCB0FDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCC85987-FF46-41AF-A03F-4269FDCB0FDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCC85987-FF46-41AF-A03F-4269FDCB0FDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCC85987-FF46-41AF-A03F-4269FDCB0FDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

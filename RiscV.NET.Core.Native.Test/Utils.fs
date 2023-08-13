@@ -1,6 +1,7 @@
-module Riscv.NET.Test.Utils
+module Riscv.NET.Core.Native.Test.Utils
 
-open Riscv.NET
+open RiscV.NET.Core
+open RiscV.NET.Native
 open System.Diagnostics
 open System.IO
 open System.Threading.Tasks
