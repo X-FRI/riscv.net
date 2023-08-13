@@ -63,17 +63,17 @@ let execute cpu inst =
         // lbu
         | 0x4UL ->
             Result.map
-                (fun value -> Auto(cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)))
+                (fun value -> Auto(cpu.regs[rd] <- value))
                 (Bus.load cpu.bus addr 8UL)
         // lhu
         | 0x5UL ->
             Result.map
-                (fun value -> Auto(cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)))
+                (fun value -> Auto(cpu.regs[rd] <- value))
                 (Bus.load cpu.bus addr 16UL)
         // lwu
         | 0x6UL ->
             Result.map
-                (fun value -> Auto(cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)))
+                (fun value -> Auto(cpu.regs[rd] <- value))
                 (Bus.load cpu.bus addr 32UL)
 
         | _ -> Error(Error.IllegalInstruction inst)

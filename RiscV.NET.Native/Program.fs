@@ -10,7 +10,11 @@ let main args =
     match CPU.run cpu with
     | Ok() -> printfn "Done"
     | Error err ->
+        let err_msg = $"{Error.to_string err}"
         CPU.dump_regs cpu
+
+        printfn $"Error: {err_msg}\n\tPress any key to continue"
+        System.Console.Read() |> ignore
         failwith $"{Error.to_string err}"
 
     0

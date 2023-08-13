@@ -1,0 +1,237 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TestRun id="dbc49058-c016-4033-99d5-396c5eef292d" name="@localhost 2023-08-13 22:26:03" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <Times creation="2023-08-13T22:26:03.5357377+08:00" queuing="2023-08-13T22:26:03.5357378+08:00" start="2023-08-13T22:26:02.2675787+08:00" finish="2023-08-13T22:26:03.9593116+08:00" />
+  <TestSettings name="default" id="1f8ce666-cc46-449a-8dc4-d7872e9f8c01">
+    <Deployment runDeploymentRoot="_localhost_2023-08-13_22_26_03" />
+  </TestSettings>
+  <Results>
+    <UnitTestResult executionId="de1b5052-3404-4fbd-9c2f-63873cc899b3" testId="2dd56bd3-4ba4-deeb-1266-6d76daace0f4" testName="beq" computerName="localhost" duration="00:00:00.0806530" startTime="2023-08-13T22:26:02.9812992+08:00" endTime="2023-08-13T22:26:03.0619515+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="de1b5052-3404-4fbd-9c2f-63873cc899b3">
+      <Output>
+        <StdOut>test_beq...ok</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="1bc17078-b76f-4e4c-9b8e-0d1f842156ee" testId="6cbc80b0-6130-a987-9aad-0533cb3ecbb0" testName="jalr" computerName="localhost" duration="00:00:00.0641890" startTime="2023-08-13T22:26:03.4712029+08:00" endTime="2023-08-13T22:26:03.5353912+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1bc17078-b76f-4e4c-9b8e-0d1f842156ee">
+      <Output>
+        <StdOut>test_jalr...ok</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="cd4f6450-1e35-4413-8b83-7acd2b439ffd" testId="04b8e833-06a5-dddf-51c3-dd55248c0943" testName="slt" computerName="localhost" duration="00:00:00.0677720" startTime="2023-08-13T22:26:03.7702904+08:00" endTime="2023-08-13T22:26:03.8380613+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cd4f6450-1e35-4413-8b83-7acd2b439ffd">
+      <Output>
+        <StdOut>test_slt...ok</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="d9dafa56-417f-4b88-9b3a-66be41444821" testId="0483e2f6-6938-2652-829b-62ac28838b5d" testName="sll" computerName="localhost" duration="00:00:00.0666420" startTime="2023-08-13T22:26:03.7035941+08:00" endTime="2023-08-13T22:26:03.7702360+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d9dafa56-417f-4b88-9b3a-66be41444821">
+      <Output>
+        <StdOut>test_sll...ok</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="1ea94c4e-7574-4903-907b-7f7c9dc02f41" testId="f519e2f0-80cf-9f62-ced7-4cb1f38d878f" testName="simple" computerName="localhost" duration="00:00:00.0656900" startTime="2023-08-13T22:26:03.6378600+08:00" endTime="2023-08-13T22:26:03.7035472+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1ea94c4e-7574-4903-907b-7f7c9dc02f41">
+      <Output>
+        <StdOut>test_simple...ok</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="e9d23d7a-0f5c-4333-b1dc-b8e272658203" testId="71225ce1-4a32-6653-c359-0d725aad2d67" testName="auipc" computerName="localhost" duration="00:00:00.0581150" startTime="2023-08-13T22:26:02.9231378+08:00" endTime="2023-08-13T22:26:02.9812523+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e9d23d7a-0f5c-4333-b1dc-b8e272658203">
+      <Output>
+        <StdOut>test_auipc...ok</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="6a772057-5ddb-4d01-923f-2487df1b8eba" testId="046e3095-db06-a377-cca9-e5ab40be504b" testName="lui" computerName="localhost" duration="00:00:00.1023940" startTime="2023-08-13T22:26:03.5354297+08:00" endTime="2023-08-13T22:26:03.6378234+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6a772057-5ddb-4d01-923f-2487df1b8eba">
+      <Output>
+        <StdOut>test_lui...ok</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="143d6666-f3b0-4300-9bde-9967c602477c" testId="20c8c54b-7b91-0875-6cb6-005ada8dbb84" testName="bge" computerName="localhost" duration="00:00:00.0797730" startTime="2023-08-13T22:26:03.0621096+08:00" endTime="2023-08-13T22:26:03.1418820+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="143d6666-f3b0-4300-9bde-9967c602477c">
+      <Output>
+        <StdOut>test_bge...ok</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="c53f8404-0e55-4bea-b26f-6d05019ddd9e" testId="ed3e6d2e-1fe0-7d61-a974-143ea9f84efb" testName="addi" computerName="localhost" duration="00:00:00.1084990" startTime="2023-08-13T22:26:02.7540483+08:00" endTime="2023-08-13T22:26:02.8624922+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c53f8404-0e55-4bea-b26f-6d05019ddd9e">
+      <Output>
+        <StdOut>test_addi...ok</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="eb602612-cf1f-4e18-b5fa-1de48afc848e" testId="d72999c4-b4ea-23a3-f1d6-4e9c5944e464" testName="jal" computerName="localhost" duration="00:00:00.0683540" startTime="2023-08-13T22:26:03.4028047+08:00" endTime="2023-08-13T22:26:03.4711579+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="eb602612-cf1f-4e18-b5fa-1de48afc848e">
+      <Output>
+        <StdOut>test_jal...ok</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="45677831-7f17-44b2-b4a2-762b89078370" testId="9627ff22-d7fe-d9ba-2459-501c0b8c8928" testName="bne" computerName="localhost" duration="00:00:00.0661009" startTime="2023-08-13T22:26:03.3366690+08:00" endTime="2023-08-13T22:26:03.4027692+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="45677831-7f17-44b2-b4a2-762b89078370">
+      <Output>
+        <StdOut>test_bne...ok</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="6d035fb9-80a2-413f-89c4-5a05378db440" testId="6ddc05c0-36c7-89ff-2310-bf2d82c8d456" testName="and" computerName="localhost" duration="00:00:00.0591060" startTime="2023-08-13T22:26:02.8639593+08:00" endTime="2023-08-13T22:26:02.9230648+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6d035fb9-80a2-413f-89c4-5a05378db440">
+      <Output>
+        <StdOut>test_and...ok</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="b521712d-18a8-4bce-8e26-fa641feecce6" testId="ec53ede1-8838-bd8e-dc03-aab174c3af5b" testName="blt" computerName="localhost" duration="00:00:00.0645170" startTime="2023-08-13T22:26:03.2048870+08:00" endTime="2023-08-13T22:26:03.2694035+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b521712d-18a8-4bce-8e26-fa641feecce6">
+      <Output>
+        <StdOut>test_blt...ok</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="54d3577b-8f81-44b7-8799-a487a574e836" testId="e2a75c50-83ab-c91a-1aa6-ea173ade65fc" testName="bgeu" computerName="localhost" duration="00:00:00.0629230" startTime="2023-08-13T22:26:03.1419267+08:00" endTime="2023-08-13T22:26:03.2048488+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="54d3577b-8f81-44b7-8799-a487a574e836">
+      <Output>
+        <StdOut>test_bgeu...ok</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ba02ea94-91b2-4795-b10a-0189501f8451" testId="b13a8fd3-e0f7-e72f-b733-ec73f72352a5" testName="xor" computerName="localhost" duration="00:00:00.0648190" startTime="2023-08-13T22:26:03.8381025+08:00" endTime="2023-08-13T22:26:03.9029213+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ba02ea94-91b2-4795-b10a-0189501f8451">
+      <Output>
+        <StdOut>test_xor...ok</StdOut>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="6fc548bc-b450-4995-bdc2-06aed2a9017a" testId="0b5cfb14-9e32-86b9-64a5-1cf28553fe37" testName="bltu" computerName="localhost" duration="00:00:00.0671940" startTime="2023-08-13T22:26:03.2694378+08:00" endTime="2023-08-13T22:26:03.3366313+08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6fc548bc-b450-4995-bdc2-06aed2a9017a">
+      <Output>
+        <StdOut>test_bltu...ok</StdOut>
+      </Output>
+    </UnitTestResult>
+  </Results>
+  <TestDefinitions>
+    <UnitTest name="simple" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.core.native.test/bin/debug/net8.0/riscv.net.core.native.test.dll" id="f519e2f0-80cf-9f62-ced7-4cb1f38d878f">
+      <Execution id="1ea94c4e-7574-4903-907b-7f7c9dc02f41" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Core.Native.Test/bin/Debug/net8.0/RiscV.NET.Core.Native.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="Riscv.NET.Core.Native.Test.Main" name="simple" />
+    </UnitTest>
+    <UnitTest name="bge" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.core.native.test/bin/debug/net8.0/riscv.net.core.native.test.dll" id="20c8c54b-7b91-0875-6cb6-005ada8dbb84">
+      <Execution id="143d6666-f3b0-4300-9bde-9967c602477c" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Core.Native.Test/bin/Debug/net8.0/RiscV.NET.Core.Native.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="Riscv.NET.Core.Native.Test.Main" name="bge" />
+    </UnitTest>
+    <UnitTest name="jal" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.core.native.test/bin/debug/net8.0/riscv.net.core.native.test.dll" id="d72999c4-b4ea-23a3-f1d6-4e9c5944e464">
+      <Execution id="eb602612-cf1f-4e18-b5fa-1de48afc848e" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Core.Native.Test/bin/Debug/net8.0/RiscV.NET.Core.Native.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="Riscv.NET.Core.Native.Test.Main" name="jal" />
+    </UnitTest>
+    <UnitTest name="addi" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.core.native.test/bin/debug/net8.0/riscv.net.core.native.test.dll" id="ed3e6d2e-1fe0-7d61-a974-143ea9f84efb">
+      <Execution id="c53f8404-0e55-4bea-b26f-6d05019ddd9e" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Core.Native.Test/bin/Debug/net8.0/RiscV.NET.Core.Native.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="Riscv.NET.Core.Native.Test.Main" name="addi" />
+    </UnitTest>
+    <UnitTest name="beq" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.core.native.test/bin/debug/net8.0/riscv.net.core.native.test.dll" id="2dd56bd3-4ba4-deeb-1266-6d76daace0f4">
+      <Execution id="de1b5052-3404-4fbd-9c2f-63873cc899b3" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Core.Native.Test/bin/Debug/net8.0/RiscV.NET.Core.Native.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="Riscv.NET.Core.Native.Test.Main" name="beq" />
+    </UnitTest>
+    <UnitTest name="sll" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.core.native.test/bin/debug/net8.0/riscv.net.core.native.test.dll" id="0483e2f6-6938-2652-829b-62ac28838b5d">
+      <Execution id="d9dafa56-417f-4b88-9b3a-66be41444821" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Core.Native.Test/bin/Debug/net8.0/RiscV.NET.Core.Native.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="Riscv.NET.Core.Native.Test.Main" name="sll" />
+    </UnitTest>
+    <UnitTest name="lui" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.core.native.test/bin/debug/net8.0/riscv.net.core.native.test.dll" id="046e3095-db06-a377-cca9-e5ab40be504b">
+      <Execution id="6a772057-5ddb-4d01-923f-2487df1b8eba" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Core.Native.Test/bin/Debug/net8.0/RiscV.NET.Core.Native.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="Riscv.NET.Core.Native.Test.Main" name="lui" />
+    </UnitTest>
+    <UnitTest name="bgeu" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.core.native.test/bin/debug/net8.0/riscv.net.core.native.test.dll" id="e2a75c50-83ab-c91a-1aa6-ea173ade65fc">
+      <Execution id="54d3577b-8f81-44b7-8799-a487a574e836" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Core.Native.Test/bin/Debug/net8.0/RiscV.NET.Core.Native.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="Riscv.NET.Core.Native.Test.Main" name="bgeu" />
+    </UnitTest>
+    <UnitTest name="slt" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.core.native.test/bin/debug/net8.0/riscv.net.core.native.test.dll" id="04b8e833-06a5-dddf-51c3-dd55248c0943">
+      <Execution id="cd4f6450-1e35-4413-8b83-7acd2b439ffd" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Core.Native.Test/bin/Debug/net8.0/RiscV.NET.Core.Native.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="Riscv.NET.Core.Native.Test.Main" name="slt" />
+    </UnitTest>
+    <UnitTest name="xor" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.core.native.test/bin/debug/net8.0/riscv.net.core.native.test.dll" id="b13a8fd3-e0f7-e72f-b733-ec73f72352a5">
+      <Execution id="ba02ea94-91b2-4795-b10a-0189501f8451" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Core.Native.Test/bin/Debug/net8.0/RiscV.NET.Core.Native.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="Riscv.NET.Core.Native.Test.Main" name="xor" />
+    </UnitTest>
+    <UnitTest name="bltu" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.core.native.test/bin/debug/net8.0/riscv.net.core.native.test.dll" id="0b5cfb14-9e32-86b9-64a5-1cf28553fe37">
+      <Execution id="6fc548bc-b450-4995-bdc2-06aed2a9017a" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Core.Native.Test/bin/Debug/net8.0/RiscV.NET.Core.Native.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="Riscv.NET.Core.Native.Test.Main" name="bltu" />
+    </UnitTest>
+    <UnitTest name="blt" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.core.native.test/bin/debug/net8.0/riscv.net.core.native.test.dll" id="ec53ede1-8838-bd8e-dc03-aab174c3af5b">
+      <Execution id="b521712d-18a8-4bce-8e26-fa641feecce6" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Core.Native.Test/bin/Debug/net8.0/RiscV.NET.Core.Native.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="Riscv.NET.Core.Native.Test.Main" name="blt" />
+    </UnitTest>
+    <UnitTest name="bne" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.core.native.test/bin/debug/net8.0/riscv.net.core.native.test.dll" id="9627ff22-d7fe-d9ba-2459-501c0b8c8928">
+      <Execution id="45677831-7f17-44b2-b4a2-762b89078370" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Core.Native.Test/bin/Debug/net8.0/RiscV.NET.Core.Native.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="Riscv.NET.Core.Native.Test.Main" name="bne" />
+    </UnitTest>
+    <UnitTest name="jalr" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.core.native.test/bin/debug/net8.0/riscv.net.core.native.test.dll" id="6cbc80b0-6130-a987-9aad-0533cb3ecbb0">
+      <Execution id="1bc17078-b76f-4e4c-9b8e-0d1f842156ee" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Core.Native.Test/bin/Debug/net8.0/RiscV.NET.Core.Native.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="Riscv.NET.Core.Native.Test.Main" name="jalr" />
+    </UnitTest>
+    <UnitTest name="auipc" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.core.native.test/bin/debug/net8.0/riscv.net.core.native.test.dll" id="71225ce1-4a32-6653-c359-0d725aad2d67">
+      <Execution id="e9d23d7a-0f5c-4333-b1dc-b8e272658203" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Core.Native.Test/bin/Debug/net8.0/RiscV.NET.Core.Native.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="Riscv.NET.Core.Native.Test.Main" name="auipc" />
+    </UnitTest>
+    <UnitTest name="and" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.core.native.test/bin/debug/net8.0/riscv.net.core.native.test.dll" id="6ddc05c0-36c7-89ff-2310-bf2d82c8d456">
+      <Execution id="6d035fb9-80a2-413f-89c4-5a05378db440" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Core.Native.Test/bin/Debug/net8.0/RiscV.NET.Core.Native.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="Riscv.NET.Core.Native.Test.Main" name="and" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestEntries>
+    <TestEntry testId="2dd56bd3-4ba4-deeb-1266-6d76daace0f4" executionId="de1b5052-3404-4fbd-9c2f-63873cc899b3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6cbc80b0-6130-a987-9aad-0533cb3ecbb0" executionId="1bc17078-b76f-4e4c-9b8e-0d1f842156ee" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="04b8e833-06a5-dddf-51c3-dd55248c0943" executionId="cd4f6450-1e35-4413-8b83-7acd2b439ffd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0483e2f6-6938-2652-829b-62ac28838b5d" executionId="d9dafa56-417f-4b88-9b3a-66be41444821" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f519e2f0-80cf-9f62-ced7-4cb1f38d878f" executionId="1ea94c4e-7574-4903-907b-7f7c9dc02f41" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="71225ce1-4a32-6653-c359-0d725aad2d67" executionId="e9d23d7a-0f5c-4333-b1dc-b8e272658203" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="046e3095-db06-a377-cca9-e5ab40be504b" executionId="6a772057-5ddb-4d01-923f-2487df1b8eba" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="20c8c54b-7b91-0875-6cb6-005ada8dbb84" executionId="143d6666-f3b0-4300-9bde-9967c602477c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ed3e6d2e-1fe0-7d61-a974-143ea9f84efb" executionId="c53f8404-0e55-4bea-b26f-6d05019ddd9e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d72999c4-b4ea-23a3-f1d6-4e9c5944e464" executionId="eb602612-cf1f-4e18-b5fa-1de48afc848e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9627ff22-d7fe-d9ba-2459-501c0b8c8928" executionId="45677831-7f17-44b2-b4a2-762b89078370" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6ddc05c0-36c7-89ff-2310-bf2d82c8d456" executionId="6d035fb9-80a2-413f-89c4-5a05378db440" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ec53ede1-8838-bd8e-dc03-aab174c3af5b" executionId="b521712d-18a8-4bce-8e26-fa641feecce6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e2a75c50-83ab-c91a-1aa6-ea173ade65fc" executionId="54d3577b-8f81-44b7-8799-a487a574e836" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b13a8fd3-e0f7-e72f-b733-ec73f72352a5" executionId="ba02ea94-91b2-4795-b10a-0189501f8451" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0b5cfb14-9e32-86b9-64a5-1cf28553fe37" executionId="6fc548bc-b450-4995-bdc2-06aed2a9017a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <ResultSummary outcome="Completed">
+    <Counters total="16" executed="16" passed="16" failed="0" error="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+    <Output>
+      <StdOut>NUnit Adapter 4.4.0.0: Test execution started
+Running selected tests in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Core.Native.Test/bin/Debug/net8.0/RiscV.NET.Core.Native.Test.dll
+   NUnit3TestExecutor discovered 16 of 16 NUnit test cases using Current Discovery mode, Non-Explicit run
+NUnit Adapter 4.4.0.0: Test execution complete
+</StdOut>
+    </Output>
+    <RunInfos>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T22:26:02.8954673+08:00">
+        <Text>test_addi...ok</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T22:26:02.9271733+08:00">
+        <Text>test_and...ok</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T22:26:02.9822322+08:00">
+        <Text>test_auipc...ok</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T22:26:03.0637664+08:00">
+        <Text>test_beq...ok</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T22:26:03.1433312+08:00">
+        <Text>test_bge...ok</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T22:26:03.2056907+08:00">
+        <Text>test_bgeu...ok</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T22:26:03.2702577+08:00">
+        <Text>test_blt...ok</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T22:26:03.3374059+08:00">
+        <Text>test_bltu...ok</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T22:26:03.4037152+08:00">
+        <Text>test_bne...ok</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T22:26:03.5430711+08:00">
+        <Text>test_jal...ok</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T22:26:03.5431320+08:00">
+        <Text>test_jalr...ok</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T22:26:03.6386729+08:00">
+        <Text>test_lui...ok</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T22:26:03.7043198+08:00">
+        <Text>test_simple...ok</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T22:26:03.7711637+08:00">
+        <Text>test_sll...ok</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T22:26:03.8389659+08:00">
+        <Text>test_slt...ok</Text>
+      </RunInfo>
+      <RunInfo computerName="localhost" outcome="Warning" timestamp="2023-08-13T22:26:03.9035925+08:00">
+        <Text>test_xor...ok</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+</TestRun>
