@@ -19,11 +19,11 @@ x20(s4) = 0x0	x21(s5) = 0x0	x22(s6) = 0x0	x23(s7) = 0x0
 x24(s8) = 0x0	x25(s9) = 0x0	x26(s10) = 0x0	x27(s11) = 0x0
 x28(t3) = 0x0	x29(t4) = 0x0	x30(t5) = 0x0	x31(t6) = 0x0</StdOut>
         <ErrorInfo>
-          <StackTrace>   at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 136
-   at RiscV.Net.Test.Program.sll() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 194
+          <StackTrace>   at Riscv.NET.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 136
+   at Riscv.NET.Test.Program.sll() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 194
 
-1)    at RiscV.Net.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 136
-   at RiscV.Net.Test.Program.sll() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 194
+1)    at Riscv.NET.Test.Utils.riscv_test[a](String code, a testname, Int32 n_cloc, FSharpFunc`2 assert_fn) in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Utils.fs:line 136
+   at Riscv.NET.Test.Program.sll() in /home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/Program.fs:line 194
 
 </StackTrace>
         </ErrorInfo>
@@ -33,7 +33,7 @@ x28(t3) = 0x0	x29(t4) = 0x0	x30(t5) = 0x0	x31(t6) = 0x0</StdOut>
   <TestDefinitions>
     <UnitTest name="sll" storage="/home/muqiu-han/workspace/riscv.net/riscv.net.test/bin/debug/net7.0/riscv.net.test.dll" id="326233d2-529e-4fdb-5d36-206232ea54d1">
       <Execution id="1903bc1f-e068-4cfd-8bbb-e3771c6f3bca" />
-      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/RiscV.NET.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="RiscV.Net.Test.Program" name="sll" />
+      <TestMethod codeBase="/home/muqiu-han/Workspace/riscv.net/RiscV.NET.Test/bin/Debug/net7.0/RiscV.NET.Test.dll" adapterTypeName="executor://nunit3testexecutor/" className="Riscv.NET.Test.Program" name="sll" />
     </UnitTest>
   </TestDefinitions>
   <TestEntries>

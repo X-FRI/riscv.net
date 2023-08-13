@@ -1,4 +1,4 @@
-module RiscV.Net.Dram
+module Riscv.NET.Dram
 
 let BASE : uint64 = 0x8000_0000UL
 let SIZE : uint64 = 1024UL * 1024UL * 128UL

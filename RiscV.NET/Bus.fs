@@ -1,4 +1,4 @@
-module RiscV.Net.Bus
+module Riscv.NET.Bus
 
 type t = { dram : Dram.t }
 

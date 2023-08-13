@@ -1,4 +1,4 @@
-﻿module RiscV.Net.Program
+﻿module Riscv.NET.Program
 
 open System.IO
 

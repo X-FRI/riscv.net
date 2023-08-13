@@ -1,4 +1,4 @@
-module RiscV.Net.CPU
+module Riscv.NET.CPU
 
 module Regs =
     type t = array<uint64>
@@ -72,8 +72,6 @@ let execute cpu inst =
 
     cpu.regs[0] <- 0UL
 
-    printfn $"opcode = %X{opcode}"
-
     match opcode with
     | 0x03UL ->
         let imm = ((inst |> int32 |> int64) >>> 20) |> uint64
@@ -88,17 +86,17 @@ let execute cpu inst =
         // lh
         | 0x1UL ->
             Result.map
-                (fun value -> Auto(cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)))
+                (fun value -> Auto(cpu.regs[rd] <- (value |> int16 |> int64 |> uint64)))
                 (Bus.load cpu.bus addr 16UL)
         // lw
         | 0x2UL ->
             Result.map
-                (fun value -> Auto(cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)))
+                (fun value -> Auto(cpu.regs[rd] <- (value |> int32 |> int64 |> uint64)))
                 (Bus.load cpu.bus addr 32UL)
         // ld
         | 0x3UL ->
             Result.map
-                (fun value -> Auto(cpu.regs[rd] <- (value |> int8 |> int64 |> uint64)))
+                (fun value -> Auto(cpu.regs[rd] <- value))
                 (Bus.load cpu.bus addr 64UL)
         // lbu
         | 0x4UL ->
@@ -216,12 +214,16 @@ let execute cpu inst =
         let addr = cpu.regs[rs1] + imm
 
         match funct3 with
+        // sb
         | 0x0UL ->
             Result.map (fun () -> Auto()) (Bus.store cpu.bus addr 8UL cpu.regs[rs2])
+        // sh
         | 0x1UL ->
             Result.map (fun () -> Auto()) (Bus.store cpu.bus addr 16UL cpu.regs[rs2])
+        // sw
         | 0x2UL ->
             Result.map (fun () -> Auto()) (Bus.store cpu.bus addr 32UL cpu.regs[rs2])
+        // sd
         | 0x3UL ->
             Result.map (fun () -> Auto()) (Bus.store cpu.bus addr 64UL cpu.regs[rs2])
         | _ -> failwith "Unreachable!!!!!!!"
@@ -236,7 +238,8 @@ let execute cpu inst =
         // sub
         | (0x0UL, 0x20UL) -> Ok(Auto(cpu.regs[rd] <- (cpu.regs[rs1] + cpu.regs[rs2])))
         // sll
-        | (0x1UL, 0x00UL) -> Ok(Auto(cpu.regs[rd] <- (cpu.regs[rs1] <<< (shamt |> int32))))
+        | (0x1UL, 0x00UL) ->
+            Ok(Auto(cpu.regs[rd] <- (cpu.regs[rs1] <<< (shamt |> int32))))
         // slt
         | (0x2UL, 0x00UL) ->
             Ok(

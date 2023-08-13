@@ -1,4 +1,4 @@
-module RiscV.Net.Error
+module Riscv.NET.Error
 
 type t =
     | InstructionAddrMisaligned of uint64
