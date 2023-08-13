@@ -1,10 +1,12 @@
 module RiscV.Net.Dram
 
-let BASE: uint64 = 0x8000_0000UL
-let SIZE: uint64 = 1024UL * 1024UL * 128UL
-let END: uint64 = SIZE + BASE - 1UL
+let BASE : uint64 = 0x8000_0000UL
+let SIZE : uint64 = 1024UL * 1024UL * 128UL
+let END : uint64 = SIZE + BASE - 1UL
 
-type t = { code: uint8 array; mem: uint8 array }
+type t =
+    { code : uint8 array
+      mem : uint8 array }
 
 let init code =
     let mem = Array.zeroCreate<uint8> (SIZE |> int)
@@ -22,7 +24,8 @@ let load dram addr size =
         let code = ref (dram.mem[index] |> uint64)
 
         for i = 1 to nbytes do
-            code.Value <- code.Value ||| ((dram.mem[index + (i |> int)] |> uint64) <<< (i * 8))
+            code.Value <-
+                code.Value ||| ((dram.mem[index + (i |> int)] |> uint64) <<< (i * 8))
 
         Ok(code.Value)
     | _ -> Error(Error.LoadAccessFault addr)

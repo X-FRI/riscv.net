@@ -11,11 +11,11 @@ type ExitStatus =
     | Failure
 
 type CommandResult =
-    { ExitCode: int
-      StandardOutput: string
-      StandardError: string }
+    { ExitCode : int
+      StandardOutput : string
+      StandardError : string }
 
-let ExecuteCommand: string -> seq<string> -> Async<CommandResult> =
+let ExecuteCommand : string -> seq<string> -> Async<CommandResult> =
     fun executable args ->
         async {
             let startInfo = ProcessStartInfo()
@@ -34,7 +34,10 @@ let ExecuteCommand: string -> seq<string> -> Async<CommandResult> =
             p.Start() |> ignore
 
             let outTask =
-                Task.WhenAll([| p.StandardOutput.ReadToEndAsync(); p.StandardError.ReadToEndAsync() |])
+                Task.WhenAll(
+                    [| p.StandardOutput.ReadToEndAsync()
+                       p.StandardError.ReadToEndAsync() |]
+                )
 
             do! p.WaitForExitAsync() |> Async.AwaitTask
             let! out = outTask |> Async.AwaitTask
@@ -45,7 +48,7 @@ let ExecuteCommand: string -> seq<string> -> Async<CommandResult> =
                   StandardError = out.[1] }
         }
 
-let Bind: CommandResult -> (ExitStatus * (CommandResult -> unit)) -> CommandResult =
+let Bind : CommandResult -> (ExitStatus * (CommandResult -> unit)) -> CommandResult =
     fun result (status, processer) ->
         (match status with
          | Success ->
@@ -59,10 +62,10 @@ let Bind: CommandResult -> (ExitStatus * (CommandResult -> unit)) -> CommandResu
 
 let (<|>) = Bind
 
-let Exec: string -> Async<CommandResult> =
+let Exec : string -> Async<CommandResult> =
     fun command -> ExecuteCommand "/usr/bin/env" [ "-S"; "bash"; "-c"; command ]
 
-let ExecAsync: string -> CommandResult =
+let ExecAsync : string -> CommandResult =
     fun command -> Exec command |> Async.RunSynchronously
 
 
@@ -74,17 +77,25 @@ let generate_riscv_binary src =
 
     async {
 
-        let! obj = Exec $"{CC} -Wl,-Ttext=0x0 -nostdlib --target=riscv64 -march=rv64g -mno-relax -o {src}.obj {src}.s"
+        let! obj =
+            Exec
+                $"{CC} -Wl,-Ttext=0x0 -nostdlib --target=riscv64 -march=rv64g -mno-relax -o {src}.obj {src}.s"
 
         obj
-        <|> (Failure, (fun result -> eprintfn $"Failed to generate riscv object: {src}\n{result.StandardError}"))
+        <|> (Failure,
+             (fun result ->
+                 eprintfn
+                     $"Failed to generate riscv object: {src}\n{result.StandardError}"))
         <|> (Success, (fun _ -> ()))
         |> ignore
 
         let! bin = Exec $"{LINK} -O binary {src}.obj {src}.bin"
 
         bin
-        <|> (Failure, (fun result -> eprintfn $"Failed to generate riscv binary: {src}\n{result.StandardError}"))
+        <|> (Failure,
+             (fun result ->
+                 eprintfn
+                     $"Failed to generate riscv binary: {src}\n{result.StandardError}"))
         <|> (Success, (fun _ -> ()))
         |> ignore
     }
@@ -93,7 +104,7 @@ let generate_riscv_binary src =
 exception Break of Result<CPU.t, Error.t>
 let break_with_result result = raise (Break result)
 
-let rv_helper (code: string) testname n_clock =
+let rv_helper (code : string) testname n_clock =
     use file = File.Create $"{testname}.s"
     file.Write(System.Text.Encoding.UTF8.GetBytes(code))
     file.Close()

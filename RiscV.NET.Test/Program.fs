@@ -28,8 +28,7 @@ let test_simple () =
 let test_lui () =
     let code = "lui a0, 42"
 
-    Utils.riscv_test code "test_lui" 1 (fun cpu ->
-        cpu.regs[10] = (42UL <<< 12))
+    Utils.riscv_test code "test_lui" 1 (fun cpu -> cpu.regs[10] = (42UL <<< 12))
 
 [<Test>]
 let test_auipc () =
@@ -42,7 +41,8 @@ let test_auipc () =
 let test_jal () =
     let code = "jal a0, 42"
 
-    Utils.riscv_test code "test_jal" 1 (fun cpu -> (cpu.regs[10] = (Dram.BASE + 4UL)) && (cpu.pc = (Dram.BASE + 42UL)))
+    Utils.riscv_test code "test_jal" 1 (fun cpu ->
+        (cpu.regs[10] = (Dram.BASE + 4UL)) && (cpu.pc = (Dram.BASE + 42UL)))
 
 [<Test>]
 let test_jalr () =
@@ -52,7 +52,8 @@ let test_jalr () =
             jalr a0, -8(a1)
         "
 
-    Utils.riscv_test code "test_jalr" 2 (fun cpu -> (cpu.regs[10] = Dram.BASE + 8UL) && (cpu.pc = 34UL))
+    Utils.riscv_test code "test_jalr" 2 (fun cpu ->
+        (cpu.regs[10] = Dram.BASE + 8UL) && (cpu.pc = 34UL))
 
 [<Test>]
 let test_beq () =
@@ -125,7 +126,8 @@ let test_store_load1 () =
             lh   t2, 8(sp)
         "
 
-    Utils.riscv_test code "test_store_load1" 10 (fun cpu -> (cpu.regs[6] = 0UL) && (cpu.regs[7] = 256UL))
+    Utils.riscv_test code "test_store_load1" 10 (fun cpu ->
+        (cpu.regs[6] = 0UL) && (cpu.regs[7] = 256UL))
 
 [<Test>]
 let test_slt () =
@@ -138,7 +140,8 @@ let test_slt () =
             sltiu t4, t0, 84
         "
 
-    Utils.riscv_test code "test_slt" 7 (fun cpu -> (cpu.regs[7] = 1UL) && (cpu.regs[28] = 1UL) && (cpu.regs[29] = 1UL))
+    Utils.riscv_test code "test_slt" 7 (fun cpu ->
+        (cpu.regs[7] = 1UL) && (cpu.regs[28] = 1UL) && (cpu.regs[29] = 1UL))
 
 [<Test>]
 let test_xor () =
@@ -149,7 +152,8 @@ let test_xor () =
             xor a2, a1, a1 
         "
 
-    Utils.riscv_test code "test_xor" 5 (fun cpu -> (cpu.regs[11] = 3UL) && (cpu.regs[12] = 0UL))
+    Utils.riscv_test code "test_xor" 5 (fun cpu ->
+        (cpu.regs[11] = 3UL) && (cpu.regs[12] = 0UL))
 
 [<Test>]
 let test_or () =
@@ -160,7 +164,8 @@ let test_or () =
             or   a2, a0, a0
         "
 
-    Utils.riscv_test code "test_or" 3 (fun cpu -> (cpu.regs[11] = 0b11UL) && (cpu.regs[12] = 0b10UL))
+    Utils.riscv_test code "test_or" 3 (fun cpu ->
+        (cpu.regs[11] = 0b11UL) && (cpu.regs[12] = 0b10UL))
 
 [<Test>]
 let test_and () =
@@ -171,7 +176,8 @@ let test_and () =
             and  a2, a0, a1
         "
 
-    Utils.riscv_test code "test_and" 3 (fun cpu -> (cpu.regs[11] = 0b10UL) && (cpu.regs[12] = 0b10UL))
+    Utils.riscv_test code "test_and" 3 (fun cpu ->
+        (cpu.regs[11] = 0b10UL) && (cpu.regs[12] = 0b10UL))
 
 [<Test>]
 let test_sll () =

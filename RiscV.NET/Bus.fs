@@ -1,6 +1,6 @@
 module RiscV.Net.Bus
 
-type t = { dram: Dram.t }
+type t = { dram : Dram.t }
 
 let init dram = { dram = dram }
 
