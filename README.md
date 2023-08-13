@@ -6,9 +6,11 @@
 
 *RISC-V Emualtor running in the Browser, Native or .NET CLR*
 
-![Static Badge](https://img.shields.io/badge/.NET%20Core%208.0.100~preview.7-8A2BE2)
+![](https://img.shields.io/badge/.NET%20Core%208.0.100~preview.7-8A2BE2)
+![](https://github.com/muqiuhan/riscv.net/actions/workflows/build.yml/badge.svg)
 
-__WIP__
+![](https://img.shields.io/badge/work%20in%20progress-FFFF00)
+
 
 </div>
 
@@ -24,6 +26,11 @@ To run in the browser, there are two solutions:
 
 1. Compile F# to JavaScript via [Fable](fable.io)
 2. Make F# run in the WASM environment through [Bolero](https://fsbolero.io/)
+
+
+### Performance Warning
+
+As you can see, this is not a mature solution, and it is almost impossible to become a mature solution. The performance of the simulator built through the above solution will inevitably have serious problems. The value of this project lies in my personal research and study, or to bring inspiration to others `:)`
 
 
 ## Structure
