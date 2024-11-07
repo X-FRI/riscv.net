@@ -45,24 +45,6 @@ As you can see, this is not a mature solution, and it is almost impossible to be
 - __RiscV.NET.Core.Native.Test__: Native RiscV.NET.Core tests, not related to RiscV.NET.Native.
 - __RiscV.NET.Native__: The native RiscV.NET.Core interface can be compiled into a local executable file through .NET Native AOT to run, or simply run on .NET CLR.
 
-## Build and Run
-> ...
-
-## Usage
-> ...
-
-## Progress
-- [x] Adder
-- [x] Memory and Bus
-- [ ] Control Status Register
-- [ ] Privilege Mode
-- [ ] Exception
-- [ ] PLIC & CLINT
-- [ ] UART
-- [ ] Interrupt
-- [ ] Virtio
-- [ ] Page Table
-
 ## Reference
 - [RISC-V Assembler Reference](https://mark.theis.site/riscv/asm)
 - [RISC-V ISA: A rapid way to learn the RISC-V ISA](https://risc-v.guru/instructions/)

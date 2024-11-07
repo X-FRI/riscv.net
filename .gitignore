@@ -1,12 +1,4 @@
-# F# Project build
+.idea/
 bin/
 obj/
-
-# JetBrains
-.idea/
-
-# VSCode
-.vscode
-
-*.bin
-*.obj
+.vscode/
