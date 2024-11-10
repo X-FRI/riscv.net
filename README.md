@@ -6,7 +6,7 @@
 
 *RISC-V Emualtor running in the Browser, Native or .NET CLR*
 
-![](https://img.shields.io/badge/.NET%20Core%208.0.100~preview.7-8A2BE2)
+![](https://img.shields.io/badge/.NET9.0.100~rc.2-8A2BE2)
 ![](https://github.com/muqiuhan/riscv.net/actions/workflows/build.yml/badge.svg)
 
 ![](https://img.shields.io/badge/work%20in%20progress-FFFF00)
@@ -14,23 +14,22 @@
 
 </div>
 
-## Introduction
+## Intro.
 
 - <a href="https://riscv.org/"> <img src="./.github/riscv-color.svg" height="20px"> RISC-V is an open standard Instruction Set Architecture (ISA) enabling a new era of processor innovation through open collaboration </a>
 
 - <a href="https://dotnet.microsoft.com/en-us/languages/fsharp"> <img src="./.github/fsharp.svg" height="35px"> F# is an open-source language that makes it easy to write succinct, robust, and performant code. </a>
 
-Through F#, you can run a RISC-V Emulator on .NET CLR, or make it run in the native environment through .NET Native AOT.
+This project aims to run RISC-V Emulator
+- on .NET CLR
+- on Native (.NET Native AOT)
+- [MAYBE] on Browser through WASM (https://fsbolero.io/)
+- [MAYBE] on Browser through JS (https://fable.io/)
 
-To run in the browser, there are two solutions:
+![](.github/Screenshot_20241110_170923.png)
 
-1. Compile F# to JavaScript via [Fable](fable.io)
-2. Make F# run in the WASM environment through [Bolero](https://fsbolero.io/)
-
-
-### Performance Warning
-
-As you can see, this is not a mature solution, and it is almost impossible to become a mature solution. The performance of the simulator built through the above solution will inevitably have serious problems. The value of this project lies in my personal research and study, or to bring inspiration to others `:)`
+> [!WARNING]
+> As you can see, this is not a mature solution, and it is almost impossible to become a mature solution. The performance of the simulator built through the above solution will inevitably have serious problems. The value of this project lies in my personal research and study, or to bring inspiration to others `:)`
 
 
 ## Structure
