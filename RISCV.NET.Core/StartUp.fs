@@ -6,13 +6,13 @@ open RISCV.NET.Core.Instructions
 
 type CPU with
     member this.StartUp() =
-        Log.Info "Startup..."
+        Log.Info "---------- BEGIN ----------"
 
         while this.PC < (this.Dram.Length |> uint64) do
             let instruction = this.Fetch()
-            Log.Info $"Fetching instruction: 0x%07X{instruction}"
+            Log.Info $"Fetching: 0x%07X{instruction}"
             this.Execute instruction
             this.PC <- this.PC + 4UL
 
-        Log.Info "End..."
+        Log.Info "----------- END -----------"
         this.DumpRegisters()
