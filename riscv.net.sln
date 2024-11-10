@@ -5,6 +5,8 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "RISCV.NET.Core", "RISCV.NET.Core\RISCV.NET.Core.fsproj", "{69609166-47C4-4046-B999-50BF87DCC946}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "RISCV.NET.Core.Test", "RISCV.NET.Core.Test\RISCV.NET.Core.Test.fsproj", "{1CB3715D-92DE-4D74-BD8D-DFDC1AFA4151}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{69609166-47C4-4046-B999-50BF87DCC946}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{69609166-47C4-4046-B999-50BF87DCC946}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{69609166-47C4-4046-B999-50BF87DCC946}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CB3715D-92DE-4D74-BD8D-DFDC1AFA4151}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CB3715D-92DE-4D74-BD8D-DFDC1AFA4151}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CB3715D-92DE-4D74-BD8D-DFDC1AFA4151}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CB3715D-92DE-4D74-BD8D-DFDC1AFA4151}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
