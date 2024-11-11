@@ -1,4 +1,4 @@
-module RISCV.NET.Core.Tests.Addi
+module RISCV.NET.Core.Tests.Instructions
 
 open NUnit.Framework
 open RISCV.NET.Core.CPU

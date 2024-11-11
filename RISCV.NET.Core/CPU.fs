@@ -1,25 +1,36 @@
 module RISCV.NET.Core.CPU
 
 open System
+open RISCV.NET.Core.Bus
+open RISCV.NET.Core.Dram
 
 type CPU(dram: uint8[]) =
 
     /// 32 个 64 位的通用整数寄存器
     let registers: UInt64[] = Array.create<UInt64> 32 0UL
+    let bus: Bus = Bus &dram
 
     /// 一个 64 位的 PC, 在初始化时置 0
     let mutable pc: UInt64 = 0UL
 
     do
         // 将栈指针 (SP) 指向栈顶（内存的最高地址）.
-        registers[2] <- CPU.DRAM_SIZE - 1UL
+        registers[2] <- Dram.END
 
     member public this.Dram = &dram
     member public this.Registers = &registers
     member public this.PC = &pc
 
-    (** 初始内存大小为 128MB *)
-    static member public DRAM_SIZE: UInt64 = 1024UL * 1024UL * 128UL
+    member inline public this.UpdatePC() : UInt64 = this.PC + 4UL
+
+    member public this.Fetch() : UInt32 =
+        let index = pc |> int
+
+        // 读取 [pc; pc+1; pc+2; pc+3] 四个地址上的值并组合成一个 32 位的指令
+        dram[index] |> uint32
+        ||| ((dram[index + 1] |> uint32) <<< 8)
+        ||| ((dram[index + 2] |> uint32) <<< 16)
+        ||| ((dram[index + 3] |> uint32) <<< 24)
 
     member public this.DumpRegisters() : Unit =
         [ [ "zero"
@@ -89,12 +100,3 @@ type CPU(dram: uint8[]) =
         |> PrettyTable.prettyTable
         |> PrettyTable.withHeaders [ "REG"; "VAL"; "REG"; "VAL"; "REG"; "VAL"; "REG"; "VAL" ]
         |> PrettyTable.printTable
-
-    member public this.Fetch() : UInt32 =
-        let index = pc |> int
-
-        // 读取 [pc; pc+1; pc+2; pc+3] 四个地址上的值并组合成一个 32 位的指令
-        dram[index] |> uint32
-        ||| ((dram[index + 1] |> uint32) <<< 8)
-        ||| ((dram[index + 2] |> uint32) <<< 16)
-        ||| ((dram[index + 3] |> uint32) <<< 24)

@@ -4,7 +4,6 @@
 	<s:String x:Key="/Default/Environment/Hierarchy/Build/BuildTool/CustomBuildToolPath/@EntryValue">/home/muqiu/Applications/dotnet/sdk/9.0.100-rc.2.24474.11/MSBuild.dll</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=36141de5_002D6226_002D4050_002D9a84_002D9deaa6775780/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Addi" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;TestAncestor&gt;
-    &lt;TestId&gt;NUnit3x::1CB3715D-92DE-4D74-BD8D-DFDC1AFA4151::net9.0::RISCV.NET.Core.Tests.Addi.Addi&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::1CB3715D-92DE-4D74-BD8D-DFDC1AFA4151::net9.0::RISCV.NET.Core.Tests.Addi.Add&lt;/TestId&gt;
+    &lt;TestId&gt;NUnit3x::1CB3715D-92DE-4D74-BD8D-DFDC1AFA4151::net9.0::RISCV.NET.Core.Tests.Instructions&lt;/TestId&gt;
   &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

@@ -42,14 +42,18 @@ module InstructionType =
               funct3 = (instruction >>> 12) &&& 0x7u }
 
 type CPU with
-    member public this.Execute(instruction: UInt32) =
+    member public this.Execute(instruction: UInt32) : UInt64 =
         let r_instruction = InstructionType.R.Decode instruction
         let i_instruction = InstructionType.I.Decode instruction
 
-        match r_instruction.opcode with
-        | 0x13u -> this.Addi i_instruction
-        | 0x33u -> this.Add r_instruction
-        | invalid_opcode -> failwith $"Invalid opcode 0x%07X{invalid_opcode}"
+        begin
+            match r_instruction.opcode with
+            | 0x13u -> this.Addi i_instruction
+            | 0x33u -> this.Add r_instruction
+            | invalid_opcode -> failwith $"Invalid opcode 0x%07X{invalid_opcode}"
+        end
+
+        this.UpdatePC()
 
     member private this.Addi(instruction: InstructionType.I) =
         Log.Info $"addi x{instruction.rd}, x{instruction.rs1}, 0x%07X{instruction.imm}"

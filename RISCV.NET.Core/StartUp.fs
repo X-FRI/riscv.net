@@ -11,8 +11,7 @@ type CPU with
         while this.PC < (this.Dram.Length |> uint64) do
             let instruction = this.Fetch()
             Log.Info $"Fetching: 0x%07X{instruction}"
-            this.Execute instruction
-            this.PC <- this.PC + 4UL
+            this.PC <- this.Execute instruction
 
         Log.Info "----------- END -----------"
         this.DumpRegisters()
