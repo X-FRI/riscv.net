@@ -75,27 +75,27 @@ type CPU with
         match s_instruction.funct3 with
         | 0x0u -> s_instruction |> this.Sb
         | _ -> failwith "unreachable"
-      | invalid_opcode -> failwith $"Invalid opcode 0x%07X{invalid_opcode}"
+      | invalid_opcode -> failwith $"Invalid opcode 0x%04X{invalid_opcode}"
     end
 
     this.UpdatePC ()
 
   member private this.Addi (instruction : InstructionType.I) =
     Log.Info
-      $"addi x{instruction.rd}, x{instruction.rs1}, 0x%07X{instruction.imm}"
+      $"addi x{instruction.rd}, x{instruction.rs1}, 0x%04X{instruction.imm}"
 
     this.Registers[instruction.rd] <-
       this.Registers[instruction.rs1] + instruction.imm
 
   member private this.Add (instruction : InstructionType.R) =
-    Log.Info $"addi x{instruction.rd}, x{instruction.rs1}, x{instruction.rs2}"
+    Log.Info $"add x{instruction.rd}, x{instruction.rs1}, x{instruction.rs2}"
 
     this.Registers[instruction.rd] <-
       this.Registers[instruction.rs1] + this.Registers[instruction.rs2]
 
   member private this.Lb (instruction : InstructionType.I) =
     Log.Info
-      $"lb x{instruction.rd}, 0x%07X{instruction.imm}(x{instruction.rs1})"
+      $"lb x{instruction.rd}, 0x%04X{instruction.imm}(x{instruction.rs1})"
 
     this.Registers[instruction.rd] <-
       (this.Load (this.Registers[instruction.rs1] + instruction.imm) 8UL)
@@ -103,7 +103,7 @@ type CPU with
 
   member private this.Sb (instruction : InstructionType.S) =
     Log.Info
-      $"sb x{instruction.rs2}, 0x%07X{instruction.imm}(x{instruction.rs1})"
+      $"sb x{instruction.rs2}, 0x%04X{instruction.imm}(x{instruction.rs1})"
 
     this.Store
       (this.Registers[instruction.rs1] + instruction.imm)

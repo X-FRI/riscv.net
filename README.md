@@ -31,18 +31,28 @@ This project aims to run RISC-V Emulator
 > [!WARNING]
 > As you can see, this is not a mature solution, and it is almost impossible to become a mature solution. The performance of the simulator built through the above solution will inevitably have serious problems. The value of this project lies in my personal research and study, or to bring inspiration to others `:)`
 
-
-## Structure
 ```
-.
-├── RiscV.NET.Core
-├── RiscV.NET.Core.Native.Test
-├── RiscV.NET.Native
+| 11/11/2024 10:15:17 PM [Info] LOADING MEMORY
+| 11/11/2024 10:15:17 PM [Info] A 12-byte EXECUTABLE FILE HAS BEEN LOADED
+| 11/11/2024 10:15:17 PM [Info] BUS SUCCESSFULLY INSTALLED
+| 11/11/2024 10:15:17 PM [Info] ---------- BEGIN ----------
+| 11/11/2024 10:15:17 PM [Info] addi x29, x0, 0x0005
+| 11/11/2024 10:15:17 PM [Info] addi x30, x0, 0x0025
+| 11/11/2024 10:15:17 PM [Info] add x31, x30, x29
+| 11/11/2024 10:15:17 PM [Info] ----------- END -----------
++------+-----------+-----+-----------+-----+-----------+-----+-----------+
+| REG  |    VAL    | REG |    VAL    | REG |    VAL    | REG |    VAL    |
++------+-----------+-----+-----------+-----+-----------+-----+-----------+
+| zero | 0x0000000 | ra  | 0x0000000 | sp  | 0x7FFFFFF | gp  | 0x0000000 |
+|  tp  | 0x0000000 | t0  | 0x0000000 | t1  | 0x0000000 | t2  | 0x0000000 |
+|  s0  | 0x0000000 | s1  | 0x0000000 | a0  | 0x0000000 | a1  | 0x0000000 |
+|  a2  | 0x0000000 | a3  | 0x0000000 | a4  | 0x0000000 | a5  | 0x0000000 |
+|  a6  | 0x0000000 | a7  | 0x0000000 | s2  | 0x0000000 | s3  | 0x0000000 |
+|  s4  | 0x0000000 | s5  | 0x0000000 | s6  | 0x0000000 | s7  | 0x0000000 |
+|  s8  | 0x0000000 | s9  | 0x0000000 | s10 | 0x0000000 | s11 | 0x0000000 |
+|  t3  | 0x0000000 | t4  | 0x0000005 | t5  | 0x0000025 | t6  | 0x000002A |
++------+-----------+-----+-----------+-----+-----------+-----+-----------+
 ```
-
-- __RiscV.NET.Core__: The core of RiscV.NET, using .NET Core standard class library and Fable compatible class library to ensure platform independence.
-- __RiscV.NET.Core.Native.Test__: Native RiscV.NET.Core tests, not related to RiscV.NET.Native.
-- __RiscV.NET.Native__: The native RiscV.NET.Core interface can be compiled into a local executable file through .NET Native AOT to run, or simply run on .NET CLR.
 
 ## Reference
 - [RISC-V Assembler Reference](https://mark.theis.site/riscv/asm)

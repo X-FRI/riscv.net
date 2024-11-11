@@ -7,6 +7,8 @@ Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "RISCV.NET.Core", "RISCV.NET
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "RISCV.NET.Core.Test", "RISCV.NET.Core.Test\RISCV.NET.Core.Test.fsproj", "{1CB3715D-92DE-4D74-BD8D-DFDC1AFA4151}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "RISCV.NET.Native", "RISCV.NET.Native\RISCV.NET.Native.fsproj", "{F0770CA6-36B7-4A7A-971A-B1DC2E3A8C19}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{1CB3715D-92DE-4D74-BD8D-DFDC1AFA4151}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1CB3715D-92DE-4D74-BD8D-DFDC1AFA4151}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1CB3715D-92DE-4D74-BD8D-DFDC1AFA4151}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0770CA6-36B7-4A7A-971A-B1DC2E3A8C19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0770CA6-36B7-4A7A-971A-B1DC2E3A8C19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0770CA6-36B7-4A7A-971A-B1DC2E3A8C19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0770CA6-36B7-4A7A-971A-B1DC2E3A8C19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
