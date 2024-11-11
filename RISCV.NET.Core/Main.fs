@@ -4,7 +4,7 @@ open RISCV.NET.Core.CPU
 
 [<EntryPoint>]
 let main argv =
-    let cpu = CPU([||])
-    cpu.DumpRegisters()
+  let cpu = CPU ([||])
+  cpu.DumpRegisters ()
 
-    0
+  0
