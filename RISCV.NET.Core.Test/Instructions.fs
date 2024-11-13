@@ -1,5 +1,6 @@
 module RISCV.NET.Core.Tests.Instructions
 
+open System
 open NUnit.Framework
 open RISCV.NET.Core.CPU
 open RISCV.NET.Core.Tests.GenerateTestBinary
@@ -51,3 +52,16 @@ let Lb () =
   cpu.StartUp ()
 
   Assert.That (cpu.Registers[29], Is.EqualTo 0x99)
+
+[<Test>]
+let Ld () =
+  use gen = new Gen ("ld", [| "ld x28, 0x500(x0)" |])
+
+  let cpu = CPU gen.Code
+
+  let test = BitConverter.GetBytes (9999UL)
+  Array.blit test 0 cpu.Bus.Dram.Value 0x500 test.Length
+
+  cpu.StartUp ()
+
+  Assert.That (cpu.Registers[28], Is.EqualTo 9999UL)

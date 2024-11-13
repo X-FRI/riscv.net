@@ -66,7 +66,14 @@ type CPU with
 
     begin
       match r_instruction.opcode with
-      | 0x03u -> InstructionType.I.Decode instruction |> this.Lb
+      | 0x03u ->
+        let instruction = InstructionType.I.Decode instruction
+
+        match instruction.funct3 with
+        | 0x0u -> instruction |> this.Lb
+        | 0x3u -> instruction |> this.Ld
+        | func3 -> failwith $"Invalid func3 0x%04X{func3}"
+
       | 0x13u -> InstructionType.I.Decode instruction |> this.Addi
       | 0x33u -> r_instruction |> this.Add
       | 0x23u ->
@@ -99,6 +106,14 @@ type CPU with
 
     this.Registers[instruction.rd] <-
       (this.Load (this.Registers[instruction.rs1] + instruction.imm) 8UL)
+      |> uint64
+
+  member private this.Ld (instruction : InstructionType.I) =
+    Log.Info
+      $"ld x{instruction.rd}, 0x%04X{instruction.imm}(x{instruction.rs1})"
+
+    this.Registers[instruction.rd] <-
+      this.Load (this.Registers[instruction.rs1] + instruction.imm) 64UL
       |> uint64
 
   member private this.Sb (instruction : InstructionType.S) =

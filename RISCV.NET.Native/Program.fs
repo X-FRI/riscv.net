@@ -6,7 +6,7 @@ open RISCV.NET.Core.StartUp
 
 [<EntryPoint>]
 let main args =
-  
+
   let cpu = CPU (IO.File.ReadAllBytes args[0])
   cpu.StartUp ()
 
