@@ -1,9 +1,13 @@
 module RISCV.NET.Core.Tests.GenerateTestBinary
 
 open System
+open System.Runtime.CompilerServices
 open RISCV.NET.Core.Tests.FsExecute
 
-type Gen (name : string, source : string[]) =
+type Gen (source : string[], [<CallerMemberName>] ?name : string) =
+  let name =
+    name |> Option.map (fun name -> name.Trim [| '(' ; ')' |]) |> Option.get
+
   let compile =
     $"clang -Wl,-Ttext=0x0 -nostdlib --target=riscv64 -march=rv64g -mno-relax -o {name} {name}.s"
 

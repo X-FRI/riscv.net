@@ -71,8 +71,13 @@ type CPU with
 
         match instruction.funct3 with
         | 0x0u -> instruction |> this.Lb
+        | 0x1u -> instruction |> this.Lh
+        | 0x2u -> instruction |> this.Lw
         | 0x3u -> instruction |> this.Ld
-        | func3 -> failwith $"Invalid func3 0x%04X{func3}"
+        | 0x4u -> instruction |> this.Lbu
+        | 0x5u -> instruction |> this.Lhu
+        | 0x6u -> instruction |> this.Lwu
+        | _ -> failwith "unreachable"
 
       | 0x13u -> InstructionType.I.Decode instruction |> this.Addi
       | 0x33u -> r_instruction |> this.Add
@@ -108,13 +113,49 @@ type CPU with
       (this.Load (this.Registers[instruction.rs1] + instruction.imm) 8UL)
       |> uint64
 
+  member private this.Lbu (instruction : InstructionType.I) =
+    Log.Info
+      $"lbu x{instruction.rd}, 0x%04X{instruction.imm}(x{instruction.rs1})"
+
+    this.Registers[instruction.rd] <-
+      (this.Load (this.Registers[instruction.rs1] + instruction.imm) 8UL)
+
+  member private this.Lh (instruction : InstructionType.I) =
+    Log.Info
+      $"lh x{instruction.rd}, 0x%04X{instruction.imm}(x{instruction.rs1})"
+
+    this.Registers[instruction.rd] <-
+      (this.Load (this.Registers[instruction.rs1] + instruction.imm) 16UL)
+      |> uint64
+
+  member private this.Lhu (instruction : InstructionType.I) =
+    Log.Info
+      $"lhu x{instruction.rd}, 0x%04X{instruction.imm}(x{instruction.rs1})"
+
+    this.Registers[instruction.rd] <-
+      (this.Load (this.Registers[instruction.rs1] + instruction.imm) 16UL)
+
+  member private this.Lw (instruction : InstructionType.I) =
+    Log.Info
+      $"lw x{instruction.rd}, 0x%04X{instruction.imm}(x{instruction.rs1})"
+
+    this.Registers[instruction.rd] <-
+      (this.Load (this.Registers[instruction.rs1] + instruction.imm) 32UL)
+      |> uint64
+
+  member private this.Lwu (instruction : InstructionType.I) =
+    Log.Info
+      $"lwu x{instruction.rd}, 0x%04X{instruction.imm}(x{instruction.rs1})"
+
+    this.Registers[instruction.rd] <-
+      (this.Load (this.Registers[instruction.rs1] + instruction.imm) 32UL)
+
   member private this.Ld (instruction : InstructionType.I) =
     Log.Info
       $"ld x{instruction.rd}, 0x%04X{instruction.imm}(x{instruction.rs1})"
 
     this.Registers[instruction.rd] <-
       this.Load (this.Registers[instruction.rs1] + instruction.imm) 64UL
-      |> uint64
 
   member private this.Sb (instruction : InstructionType.S) =
     Log.Info

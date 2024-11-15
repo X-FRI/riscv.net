@@ -8,8 +8,8 @@ open RISCV.NET.Core.StartUp
 
 [<Test>]
 let Addi () =
-  use gen = new Gen ("addi", [| "addi x29, x0, 5" ; "addi x30, x0, 37" |])
-  let cpu = CPU (gen.Code)
+  use gen = new Gen [| "addi x29, x0, 5" ; "addi x30, x0, 37" |]
+  let cpu = CPU gen.Code
   cpu.StartUp ()
 
   Assert.That (cpu.Registers[29], Is.EqualTo 5)
@@ -18,22 +18,19 @@ let Addi () =
 [<Test>]
 let Add () =
   use gen =
-    new Gen (
-      "add",
-      [| "addi x29, x0, 5"
-         "addi x30, x0, 37"
-         "add x31, x30, x29" |]
-    )
+    new Gen [| "addi x29, x0, 5"
+               "addi x30, x0, 37"
+               "add x31, x30, x29" |]
 
-  let cpu = CPU (gen.Code)
+  let cpu = CPU gen.Code
   cpu.StartUp ()
 
   Assert.That (cpu.Registers[31], Is.EqualTo 42)
 
 [<Test>]
 let Sb () =
-  use gen = new Gen ("sb", [| "addi x30, x0, 0x99" ; "sb x30, 0x500(x0)" |])
-  let cpu = CPU (gen.Code)
+  use gen = new Gen [| "addi x30, x0, 0x99" ; "sb x30, 0x500(x0)" |]
+  let cpu = CPU gen.Code
   cpu.StartUp ()
 
   Assert.That (cpu.Bus.Dram.Value[0x500], Is.EqualTo 0x99)
@@ -41,21 +38,78 @@ let Sb () =
 [<Test>]
 let Lb () =
   use gen =
-    new Gen (
-      "lb",
-      [| "addi x30, x0, 0x99"
-         "sb x30, 0x500(x0)"
-         "lb x29, 0x500(x0)" |]
-    )
+    new Gen [| "addi x30, x0, 0x99"
+               "sb x30, 0x500(x0)"
+               "lb x29, 0x500(x0)" |]
 
-  let cpu = CPU (gen.Code)
+  let cpu = CPU gen.Code
+  cpu.StartUp ()
+
+  Assert.That (cpu.Registers[29], Is.EqualTo 0x99)
+
+[<Test>]
+let Lh () =
+  use gen =
+    new Gen [| "addi x30, x0, 0x99"
+               "sb x30, 0x500(x0)"
+               "lh x29, 0x500(x0)" |]
+
+  let cpu = CPU gen.Code
+  cpu.StartUp ()
+
+  Assert.That (cpu.Registers[29], Is.EqualTo 0x99)
+
+[<Test>]
+let Lw () =
+  use gen =
+    new Gen [| "addi x30, x0, 0x99"
+               "sb x30, 0x500(x0)"
+               "lw x29, 0x500(x0)" |]
+
+  let cpu = CPU gen.Code
+  cpu.StartUp ()
+
+  Assert.That (cpu.Registers[29], Is.EqualTo 0x99)
+
+[<Test>]
+let Lbu () =
+  use gen =
+    new Gen [| "addi x30, x0, 0x99"
+               "sb x30, 0x500(x0)"
+               "lbu x29, 0x500(x0)" |]
+
+  let cpu = CPU gen.Code
+  cpu.StartUp ()
+
+  Assert.That (cpu.Registers[29], Is.EqualTo 0x99)
+
+[<Test>]
+let Lwu () =
+  use gen =
+    new Gen [| "addi x30, x0, 0x99"
+               "sb x30, 0x500(x0)"
+               "lwu x29, 0x500(x0)" |]
+
+  let cpu = CPU gen.Code
+  cpu.StartUp ()
+
+  Assert.That (cpu.Registers[29], Is.EqualTo 0x99)
+
+[<Test>]
+let Lhu () =
+  use gen =
+    new Gen [| "addi x30, x0, 0x99"
+               "sb x30, 0x500(x0)"
+               "lhu x29, 0x500(x0)" |]
+
+  let cpu = CPU gen.Code
   cpu.StartUp ()
 
   Assert.That (cpu.Registers[29], Is.EqualTo 0x99)
 
 [<Test>]
 let Ld () =
-  use gen = new Gen ("ld", [| "ld x28, 0x500(x0)" |])
+  use gen = new Gen [| "ld x28, 0x500(x0)" |]
 
   let cpu = CPU gen.Code
 
