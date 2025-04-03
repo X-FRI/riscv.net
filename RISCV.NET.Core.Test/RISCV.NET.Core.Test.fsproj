@@ -9,6 +9,7 @@
         <Compile Include="FsExecute.fs"/>
         <Compile Include="GenerateTestBinary.fs"/>
         <Compile Include="Instructions.fs"/>
+        <Compile Include="C.fs"/>
         <Compile Include="Program.fs"/>
     </ItemGroup>
     <ItemGroup>

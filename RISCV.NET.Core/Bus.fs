@@ -15,7 +15,7 @@ type Bus (code : inref<uint8[]>) =
     if address >= Dram.BASE && address <= Dram.END then
       dram.Load address size
     else
-      failwith $"Load access fault {address}"
+      failwith $"Load access fault 0x%07X{address}"
 
   member public this.Store
     (address : UInt64)
@@ -26,4 +26,4 @@ type Bus (code : inref<uint8[]>) =
     if address >= Dram.BASE && address <= Dram.END then
       dram.Store address size value
     else
-      failwith $"Store AMO access fault {address}"
+      failwith $"Store AMO access fault 0x%07X{address}"
